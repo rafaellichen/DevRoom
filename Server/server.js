@@ -13,7 +13,7 @@ admin.initializeApp({
 var db = admin.database();
 var ref = db.ref("quiz/abcdefg");
 ref.once("value", function(snapshot) {
-  console.log(snapshot.val());
+  // console.log(snapshot.val());
 });
 
 function write() {
@@ -43,3 +43,27 @@ function write() {
   })
 }
 // write()
+
+function signup() {
+  admin.auth().createUser({
+    email: "admin@gmail.com",
+    password: "password",
+  })
+  .then(function(userRecord) {
+    // See the UserRecord reference doc for the contents of userRecord.
+    console.log("Successfully created new user:", userRecord.uid);
+  })
+  .catch(function(error) {
+    console.log("Error creating new user:", error);
+  });
+}
+// signup()
+
+function profile() {
+  // https://firebase.google.com/docs/auth/admin/manage-users
+}
+
+function login() {
+  // login on client side, and server verifies id token
+  // https://firebase.google.com/docs/auth/admin/verify-id-tokens
+}
