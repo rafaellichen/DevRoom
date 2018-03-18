@@ -67,3 +67,19 @@ function login() {
   // login on client side, and server verifies id token
   // https://firebase.google.com/docs/auth/admin/verify-id-tokens
 }
+
+
+const express	= require('express');
+const bodyParser = require('body-parser');
+const app = express();
+const sqlite3 = require("sqlite3").verbose();
+// const db = new sqlite3.Database("devroom.db")
+const PORT = process.env.PORT || 3000
+
+app.set('view engine', 'pug')
+app.use(express.static(__dirname + '/views'));
+app.get('/',function(req,res) {
+  res.render('home');
+});
+
+app.listen(PORT, () => console.log(`Listening on http://localhost:${ PORT }`))
