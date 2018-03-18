@@ -50,6 +50,7 @@ Add additional notes about how to deploy this on a live system
 * [PugJS](https://pugjs.org/api/getting-started.html) - high-performance template engine
 ## Useful links
 - The super fast color schemes generator! https://coolors.co/d1c6ad-bbada0-a1869e-797596-0b1d51
+- CSS Sprites Generator https://www.toptal.com/developers/css/sprite-generator
 
 ## Contributing
 
