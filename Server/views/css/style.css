@@ -194,6 +194,11 @@ Stretchy Nav style - common to:
   padding-top: 20px;
   padding-bottom: 20px;
 }
+
+.cd-stretchy-nav ul li:nth-last-child(1) {
+  padding-top: 80px;
+  padding-bottom: 20px;
+}
 .cd-stretchy-nav ul a::after {
   /* navigation item icons */
   content: '';
@@ -209,7 +214,7 @@ Stretchy Nav style - common to:
   transform: translateY(-50%) scale(0);
   opacity: .3;
   /* background: url(../images/cd-sprite-1.svg) no-repeat 0 0; */
-  background: url(../images/css_sprites.png);
+  background: url(../images/navigation\ bar/navbar.png);
 }
 .cd-stretchy-nav ul a::before {
   /* line visible next to the active navigation item */
@@ -228,20 +233,26 @@ Stretchy Nav style - common to:
 }
 .cd-stretchy-nav ul li:first-of-type a::after {
   /* change custom icon using image sprites */
-  background-position: 0 0;
+  background-position: 0 192px;
 }
 .cd-stretchy-nav ul li:nth-of-type(2) a::after {
   background-position: 0 -64px;
 }
 .cd-stretchy-nav ul li:nth-of-type(3) a::after {
-  background-position: 0 128px;
-}
-.cd-stretchy-nav ul li:nth-of-type(4) a::after {
   background-position: 0 64px;
 }
-/* .cd-stretchy-nav ul li:nth-of-type(5) a::after {
-  background-position: -64px 0;
-} */
+.cd-stretchy-nav ul li:nth-of-type(4) a::after {
+  background-position: 0 -192px;
+}
+.cd-stretchy-nav ul li:nth-of-type(5) a::after {
+  background-position: 0 -320px;
+}
+.cd-stretchy-nav ul li:nth-of-type(6) a::after {
+  background-position: 0 -320px;
+}
+.cd-stretchy-nav ul li:nth-of-type(7) a::after {
+  background-position: 0 -320px;
+}
 .cd-stretchy-nav ul span {
   /* navigation item labels */
   display: block;

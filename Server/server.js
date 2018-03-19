@@ -83,8 +83,33 @@ app.get('/',function(req,res) {
   res.render('home');
 });
 
-app.get('/student',function(req,res) {
-  res.render('student');
+app.get('/revoke/:uid',function(req,res) {
+  uid = req.params.uid
+  admin.auth().revokeRefreshTokens(uid)
+  res.render("home")
+})
+
+app.get('/:idToken',function(req,res) {
+  idToken = req.params.idToken
+  let checkRevoked = true;
+  admin.auth().verifyIdToken(idToken, checkRevoked)
+  .then(function(decodedToken) {
+    var uid = decodedToken.uid;
+    var ref = db.ref("user/"+uid);
+    ref.once("value", function(snapshot) {
+      // console.log(snapshot.val());
+      if(snapshot.val().permission==0) {
+        res.render('student')
+      }
+      if(snapshot.val().permission==1) {
+        res.render('instructor')
+      }
+    });
+    // ...
+  }).catch(function(error) {
+    // Handle error
+    res.render('home');
+  });
 });
 
 app.listen(PORT, () => console.log(`Listening on http://localhost:${ PORT }`))
