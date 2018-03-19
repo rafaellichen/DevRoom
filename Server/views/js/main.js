@@ -14,7 +14,6 @@ jQuery(document).ready(function(){
 		stretchyNavs.each(function(){
 			var stretchyNav = $(this),
 				stretchyNavTrigger = stretchyNav.find('.cd-nav-trigger');
-			
 			stretchyNavTrigger.on('click', function(event){
 				event.preventDefault();
 				stretchyNav.toggleClass('nav-is-visible');
@@ -29,9 +28,6 @@ jQuery(document).ready(function(){
 $('a[name="logout"]').on("click", function() {
 	uid = firebase.auth().currentUser.uid
 	firebase.auth().signOut().then(function() {
-		// Sign-out successful.
 		window.location.replace("/revoke/"+uid)
-	}).catch(function(error) {
-		// An error happened.
-	});
+	})
 })

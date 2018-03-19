@@ -1,20 +1,10 @@
-var admin = require("firebase-admin");
-
-// Fetch the service account key JSON file contents
-var serviceAccount = require("./c4q-grading-system-firebase-adminsdk-auy6d-1256425416.json");
-
-// Initialize the app with a service account, granting admin privileges
+const admin = require("firebase-admin");
+const serviceAccount = require("./c4q-grading-system-firebase-adminsdk-auy6d-1256425416.json");
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://c4q-grading-system.firebaseio.com"
 });
-
-// As an admin, the app has access to read and write all data, regardless of Security Rules
-var db = admin.database();
-var ref = db.ref("quiz/abcdefg");
-ref.once("value", function(snapshot) {
-  // console.log(snapshot.val());
-});
+const db = admin.database();
 
 function write() {
   db.ref("grade/hihihihi/abcdefg").set({
@@ -63,12 +53,6 @@ function profile() {
   // https://firebase.google.com/docs/auth/admin/manage-users
 }
 
-function login() {
-  // login on client side, and server verifies id token
-  // https://firebase.google.com/docs/auth/admin/verify-id-tokens
-}
-
-
 const express	= require('express');
 const bodyParser = require('body-parser');
 const app = express();
@@ -82,6 +66,36 @@ app.use(express.static(__dirname + '/views'));
 app.get('/',function(req,res) {
   res.render('home');
 });
+
+app.get('/register/:username/:code/:password',function(req,res) {
+  password = req.params.password
+  username = req.params.username
+  code = req.params.code
+  var ref = db.ref("invitation/"+code);
+  ref.once("value", function(snapshot) {
+    if(snapshot.val()!=null) {
+      admin.auth().createUser({
+        email: username,
+        password: password
+      })
+      .then(function(userRecord) {
+        db.ref("user/"+userRecord.uid).set({
+          last: "none",
+          first: "none",
+          permission: 0,
+          avatar: "none"
+        })
+        db.ref("invitation/"+code).remove()
+        res.send({status: "success"})
+      })
+      .catch(function(error) {
+        res.send({status: error.message})
+      });
+    } else {
+      res.send({status: "Invalide invitation code."})
+    }
+  })
+})
 
 app.get('/revoke/:uid',function(req,res) {
   uid = req.params.uid
@@ -97,7 +111,6 @@ app.get('/:idToken',function(req,res) {
     var uid = decodedToken.uid;
     var ref = db.ref("user/"+uid);
     ref.once("value", function(snapshot) {
-      // console.log(snapshot.val());
       if(snapshot.val().permission==0) {
         res.render('student')
       }
@@ -105,9 +118,7 @@ app.get('/:idToken',function(req,res) {
         res.render('instructor')
       }
     });
-    // ...
   }).catch(function(error) {
-    // Handle error
     res.render('home');
   });
 });
