@@ -24,11 +24,15 @@ A step by step series of examples that tell you have to get a development env ru
 Say what the step will be
 
 ```
-1. git clone https://github.com/rafaellichen/Group-8 in terminal
+1. git clone https://github.com/rafaellichen/DevRoom in terminal
 ```
 
 ```
-2. cd into group-8 directory and run 'npm install'
+2. cd into DevRoom directory and Server folder; then, run 'npm install'
+```
+
+```
+3. run 'npm start'
 ```
 
 ### And coding style tests
