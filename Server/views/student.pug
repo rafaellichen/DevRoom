@@ -9,6 +9,15 @@
         //- <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
         style
             include css/style.css
+        //-     include css/prism.min.css
+        //-     include css/codeflask.css
+        //- style.
+        //-     .codeview {
+        //-         height:222px;
+        //-         border:1px solid #ccc;
+        //-         background:#f5f5f5;
+                
+        //-     }
     </head>
     <body>
         <header>
@@ -24,12 +33,91 @@
                 <span aria-hidden="true" class="stretchy-nav-bg"></span>
             </nav>
         </header>
-        <main class="cd-main-content">
-            h1 student
+        <main class="cd-main-content sidebyside">
+            <div class="questions">
+                <div id="question1" class="panel panel-danger">
+                    <div class="panel-heading">Question 1</div>
+                    <div class="panel-body">This question requires writing code inside the textbox. Please write a function.</div>
+                    <div class="panel-footer">
+                        //- <div class="codeview" id="code"></div>
+                    </div>
+                </div>
+                <div id="question2" class="panel panel-danger">
+                    <div class="panel-heading">Question 2</div>
+                    <div class="panel-body">This is an example of single choice question. Please choose the first choice: "choice a".</div>
+                    <div class="panel-footer">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="radio" name="question1" aria-label="...">
+                            </span>
+                            <label type="text" name="question1" class="form-control" aria-label="...">choice a
+                        </div>
+                        br
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="radio" name="question1"  aria-label="...">
+                            </span>
+                            <label type="text" class="form-control" aria-label="...">choice b
+                        </div>
+                        br
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="radio" name="question1" aria-label="...">
+                            </span>
+                            <label type="text" class="form-control" aria-label="...">choice c
+                        </div>
+                    </div>
+                </div>
+                <div id="question3" class="panel panel-danger">
+                    <div class="panel-heading">Question 3</div>
+                    <div class="panel-body">Question 3</div>
+                </div>
+                <div id="question4" class="panel panel-danger">
+                    <div class="panel-heading">Question 4</div>
+                    <div class="panel-body">This is an example of multiple choice question. Please select these two choices: "choice a" and "choice c".</div>
+                    <div class="panel-footer">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="checkbox" aria-label="...">
+                            </span>
+                            <label type="text" class="form-control" aria-label="...">choice a
+                        </div>
+                        br
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="checkbox" aria-label="...">
+                            </span>
+                            <label type="text" class="form-control" aria-label="...">choice b
+                        </div>
+                        br
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <input type="checkbox" aria-label="...">
+                            </span>
+                            <label type="text" class="form-control" aria-label="...">choice c
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="status">
+                <div class="list-group">
+                    <a href="#question1" class="list-group-item list-group-item-danger">Q 1</a>
+                    <a href="#question2" class="list-group-item list-group-item-danger">Q 2</a>
+                    <a href="#question3" class="list-group-item list-group-item-danger">Q 3</a>
+                    <a href="#question4" class="list-group-item list-group-item-danger">Q 4</a>
+                </div>
+            </div>
         </main>
     </body>
     script
         include js/modernizr.js
         include js/jquery-2.1.4.js
         include js/main.js
+    //-     include js/prism.min.js
+    //-     include js/codeflask.js
+    //- script.
+    //-     var flask = new CodeFlask
+    //-     flask.run('#code', {
+    //-         language: 'js'
+    //-     });
 </html>

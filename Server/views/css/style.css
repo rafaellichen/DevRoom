@@ -1,3 +1,20 @@
+.sidebyside {
+  width: 80%;
+}
+.questions {
+  width: 80%;
+  margin-left: 10px;
+  float: left;
+}
+.status {
+  width: 15%;
+  float: left;
+  margin-left: 10px;
+}
+.status div a {
+  text-align: center;
+}
+
 /* -------------------------------- 
 
 Primary style
