@@ -1,5 +1,5 @@
 {
-  "name": "server",
+  "name": "DevRoom",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rafaellichen/Group-8.git"
+    "url": "git+https://github.com/rafaellichen/DevRoom.git"
   },
   "author": "Asewer, Emin, Rafael, Omari",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/rafaellichen/Group-8/issues"
+    "url": "https://github.com/rafaellichen/DevRoom/issues"
   },
-  "homepage": "https://github.com/rafaellichen/Group-8#readme",
+  "homepage": "https://github.com/rafaellichen/DevRoom#readme",
   "dependencies": {
     "firebase-admin": "^5.11.0",
     "nodemon": "^1.17.2"
