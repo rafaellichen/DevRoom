@@ -1,3 +1,10 @@
+
+
+
+
+/*//////////////////////////////////////////////////////////////////
+[ FONT ]*/
+
 @font-face {
   font-family: Poppins-Regular;
   src: url('../fonts/poppins/Poppins-Regular.ttf'); 
@@ -18,6 +25,12 @@
   src: url('../fonts/poppins/Poppins-SemiBold.ttf'); 
 }
 
+
+
+
+/*//////////////////////////////////////////////////////////////////
+[ RESTYLE TAG ]*/
+
 * {
 	margin: 0px; 
 	padding: 0px; 
@@ -29,6 +42,7 @@ body, html {
 	font-family: Poppins-Regular, sans-serif;
 }
 
+/*---------------------------------------------*/
 a {
 	font-family: Poppins-Regular;
 	font-size: 14px;
@@ -50,6 +64,7 @@ a:hover {
   color: #333333;
 }
 
+/*---------------------------------------------*/
 h1,h2,h3,h4,h5,h6 {
 	margin: 0px;
 }
@@ -67,6 +82,8 @@ ul, li {
 	list-style-type: none;
 }
 
+
+/*---------------------------------------------*/
 input {
 	outline: none;
 	border: none;
@@ -101,6 +118,7 @@ textarea:-moz-placeholder { color: #adadad;}
 textarea::-moz-placeholder { color: #adadad;}
 textarea:-ms-input-placeholder { color: #adadad;}
 
+/*---------------------------------------------*/
 button {
 	outline: none !important;
 	border: none;
@@ -115,6 +133,9 @@ iframe {
 	border: none !important;
 }
 
+
+/*//////////////////////////////////////////////////////////////////
+[ Utility ]*/
 .txt1 {
   font-family: Poppins-Regular;
   font-size: 15px;
@@ -128,6 +149,9 @@ iframe {
   color: #57b846;
   line-height: 1.5;
 }
+
+/*//////////////////////////////////////////////////////////////////
+[ login ]*/
 
 .limiter {
   width: 100%;
@@ -153,6 +177,10 @@ iframe {
   width: 390px;
   background: #fff;
 }
+
+
+/*------------------------------------------------------------------
+[ Form ]*/
 
 .login100-form {
   width: 100%;
@@ -180,6 +208,9 @@ iframe {
   width: 100%;
 }
 
+/*------------------------------------------------------------------
+[ Input ]*/
+
 .wrap-input100 {
   width: 100%;
   position: relative;
@@ -199,6 +230,7 @@ iframe {
   padding: 0 5px;
 }
 
+/*---------------------------------------------*/ 
 .focus-input100 {
   position: absolute;
   display: block;
@@ -264,6 +296,9 @@ iframe {
   width: 100%;
 }
 
+
+/*------------------------------------------------------------------
+[ Button ]*/
 .container-login100-form-btn {
   width: 100%;
   display: -webkit-box;
@@ -308,13 +343,18 @@ iframe {
 }
 
 .login100-form-btn:hover  {
-  background-color: #333333;
+  /* background-color: #333333; */
   box-shadow: 0 10px 30px 0px rgba(51, 51, 51, 0.5);
   -moz-box-shadow: 0 10px 30px 0px rgba(51, 51, 51, 0.5);
   -webkit-box-shadow: 0 10px 30px 0px rgba(51, 51, 51, 0.5);
   -o-box-shadow: 0 10px 30px 0px rgba(51, 51, 51, 0.5);
   -ms-box-shadow: 0 10px 30px 0px rgba(51, 51, 51, 0.5);
 }
+
+
+
+/*------------------------------------------------------------------
+[ Alert validate ]*/
 
 .validate-input {
   position: relative;
@@ -382,6 +422,9 @@ iframe {
   }
 }
 
+
+/*//////////////////////////////////////////////////////////////////
+[ Login more ]*/
 .login-more li {
   position: relative;
   padding-left: 16px;

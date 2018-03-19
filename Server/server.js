@@ -78,8 +78,13 @@ const PORT = process.env.PORT || 3000
 
 app.set('view engine', 'pug')
 app.use(express.static(__dirname + '/views'));
+
 app.get('/',function(req,res) {
   res.render('home');
+});
+
+app.get('/student',function(req,res) {
+  res.render('student');
 });
 
 app.listen(PORT, () => console.log(`Listening on http://localhost:${ PORT }`))
