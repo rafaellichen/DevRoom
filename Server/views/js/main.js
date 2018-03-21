@@ -31,3 +31,22 @@ $('a[name="logout"]').on("click", function() {
 		window.location.replace("/revoke/"+uid)
 	})
 })
+
+$('.placeholder').on('click', function (ev) {
+  $('.placeholder').css('opacity', '0');
+//   var length = $('.list__ul').children('li').length;
+//   $('.wrapper').css('height', 88*length+"px");
+  $('.list__ul').toggle();
+  $(this).text( $(this).text() ).css('opacity', '1');
+});
+
+ $('.list__ul a').on('click', function (ev) {
+   ev.preventDefault();
+   var index = $(this).parent().index();
+//    $('.wrapper').css('height', '');
+   $('.placeholder').text( $(this).text() ).css('opacity', '1');
+   console.log($('.list__ul').find('li').eq(index).html());
+   $('.list__ul').find('li').eq(index).prependTo('.list__ul');
+   $('.list__ul').toggle();   
+ });
+
