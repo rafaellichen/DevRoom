@@ -9,6 +9,7 @@
         //- <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
         style
             include css/style.css
+            include css/tagselector.css
         //-     include css/prism.min.css
         //-     include css/codeflask.css
         //- style.
@@ -93,7 +94,12 @@
                         </section>
                         <div class="content" id="bottom">
                             <aside>
-                                
+                                <select id="field2" multiple>
+                                    <option value="volvo">This is choice a.</option>
+                                    <option value="saab">This is choice b; don't choose this.</option>
+                                    <option value="mercedes">This is choice c; one of the correct answers;</option>
+                                    <option value="audi">This is choice d. Ignore this.</option>
+                                </select>
                             </aside>
                         </div>
                     </main>
@@ -121,6 +127,7 @@
     script
         include js/modernizr.js
         include js/jquery-2.1.4.js
+        include js/tagselector.js
         include js/main.js
     //-     include js/prism.min.js
     //-     include js/codeflask.js

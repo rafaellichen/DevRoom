@@ -50,3 +50,5 @@ $('.placeholder').on('click', function (ev) {
    $('.list__ul').toggle();   
  });
 
+var field2 = new TagSelector(document.getElementById('field2'));
+
