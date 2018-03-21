@@ -45,7 +45,7 @@ $('.placeholder').on('click', function (ev) {
    var index = $(this).parent().index();
 //    $('.wrapper').css('height', '');
    $('.placeholder').text( $(this).text() ).css('opacity', '1');
-   console.log($('.list__ul').find('li').eq(index).html());
+//    console.log($('.list__ul').find('li').eq(index).html());
    $('.list__ul').find('li').eq(index).prependTo('.list__ul');
    $('.list__ul').toggle();   
  });
