@@ -54,5 +54,12 @@ $('.placeholder').on('click', function (ev) {
 
 var field2 = new TagSelector(document.getElementById('field2'));
 
-const inputElement = document.querySelector('input[type="file"]');
-const pond = FilePond.create( inputElement );
+const inputElement = document.querySelectorAll('input[type="file"]');
+inputElement.forEach(function(e) {
+	var pond = FilePond.create(e);
+})
+FilePond.setOptions({
+	
+	ignoredFiles: ['.ds_store', 'thumbs.db', 'desktop.ini'],
+	labelIdle: 'Drag & Drop files or <span class="filepond--label-action">Browse</span>',
+})
