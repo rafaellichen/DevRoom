@@ -20,6 +20,7 @@
             //- include css/filepond.css
             include css/filepond.min.css
             include css/jackbox.css
+            include css/taskcard.css
         //-     include css/prism.min.css
         //-     include css/codeflask.css
         //- style.
@@ -35,110 +36,25 @@
                 <a class="cd-nav-trigger" href="javascript:void(0)"><span aria-hidden="true"></span></a>
                 <ul>
                     //- <li><a href="javascript:void(0)"><span>Home</span></a></li>
-                    <li><a href="javascript:void(0)"></a></li>
-                    <li><a href="javascript:void(0)"></a></li>
-                    <li><a href="javascript:void(0)"></a></li>
-                    <li><a href="javascript:void(0)"></a></li>
+                    <li><a name="home" href="javascript:void(0)"></a></li>
+                    <li><a name="profile" href="javascript:void(0)"></a></li>
+                    <li><a name="exam" href="javascript:void(0)"></a></li>
+                    <li><a name="grade" href="javascript:void(0)"></a></li>
                     <li><a name="logout" href="javascript:void(0)"></a></li>
                 </ul>
                 <span aria-hidden="true" class="stretchy-nav-bg"></span>
             </nav>
         </header>
-        <main class="cd-main-content sidebyside">
-            <div class="contact-area">
-                <div class="contact">
-                    <main>
-                        <section>
-                            <div class="content">
-                                <aside>
-                                    <h1>Question 1</h1>
-                                    <p>Write a function named addOnlyNumbers with parameters foo and bar. If foo and bar are both of type "number", return the result of foo plus bar. If foo and bar are not both numbers, return NaN.</p>
-                                    <p>Invoke your function with arguments 5 and Math.PI.</p>
-                                    <p>Invoke your function with arguments 'fidget spinner' and 22.</p>
-                                </aside>
-                            </div>
-                        </section>
-                        <div class="content" id="bottom">
-                            <aside>
-                                
-                            </aside>
-                        </div>
-                    </main>
-                </div>
-                <div class="contact">
-                    <main>
-                        <section>
-                            <div class="content">
-                                <aside>
-                                    <h1>Question 2</h1>
-                                    <p>This is an example of single choice question. Please choose a.</p>
-                                </aside>
-                            </div>
-                        </section>
-                        <div class="content" id="bottom">
-                            <aside>
-                                <div class="wrapper typo">
-                                    <div class="list"><span class="placeholder">?</span>
-                                        <ul class="list__ul">
-                                            <li><a></a></li>
-                                            <li><a>This is choice a.</a></li>
-                                            <li><a>This is choice b; don't choose this.</a></li>
-                                            <li><a>This is choice c; incorrect answer.</a></li>
-                                            <li><a>This is choice d. Ignore this.</a></li>
-                                            <li><a>All the answers above. All the answers above!</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </aside>
-                        </div>
-                    </main>
-                </div>
-                <div class="contact">
-                    <main>
-                        <section>
-                            <div class="content">
-                                <aside>
-                                    <h1>Question 3</h1>
-                                    <p>This is an example of multiple choice question. Please chooce a and c.</p>
-                                </aside>
-                            </div>
-                        </section>
-                        <div class="content" id="bottom">
-                            <aside>
-                                <select id="field2" multiple>
-                                    <option value="volvo">This is choice a.</option>
-                                    <option value="saab">This is choice b; don't choose this.</option>
-                                    <option value="mercedes">This is choice c; one of the correct answers;</option>
-                                    <option value="audi">This is choice d. Ignore this.</option>
-                                </select>
-                            </aside>
-                        </div>
-                    </main>
-                </div>
-                <div class="contact">
-                    <main>
-                        <section>
-                            <div class="content">
-                                <aside>
-                                    <h1>Question 4</h1>
-                                    <p>This is an example of file submission question. Please submit files.</p>
-                                </aside>
-                            </div>
-                        </section>
-                        <div class="content" id="bottom">
-                            <aside>
-                                <input type="file" class="filepond" name="filepond" multiple data-max-file-size="3MB" data-max-files="3" />
-                            </aside>
-                        </div>
-                    </main>
-                </div>
-            </div>
-        </main>
+        if exam
+            include exam.pug
+        if home
+            include calendar.pug
     </body>
     script
         include js/modernizr.js
         include js/jquery-2.1.4.js
-        include js/tagselector.js
+        if exam
+            include js/tagselector.js
         //- include js/filepond.js
         include js/filepond.min.js
         include js/jackbox.js

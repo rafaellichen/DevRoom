@@ -67,6 +67,14 @@ app.get('/',function(req,res) {
   res.render('home');
 });
 
+app.get('/exam',function(req,res) {
+  res.render('student', {home: false, exam: true})
+})
+
+app.get('/home',function(req,res) {
+  res.render('student', {home: true, exam: false})
+})
+
 app.get('/register/:username/:code/:password',function(req,res) {
   password = req.params.password
   username = req.params.username
@@ -112,7 +120,7 @@ app.get('/:idToken',function(req,res) {
     var ref = db.ref("user/"+uid);
     ref.once("value", function(snapshot) {
       if(snapshot.val().permission==0) {
-        res.render('student')
+        res.render('student',{home: true, exam: false})
       }
       if(snapshot.val().permission==1) {
         res.render('instructor')

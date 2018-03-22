@@ -25,6 +25,29 @@ jQuery(document).ready(function(){
 		});
 	}
 });
+$(document).ready(function() {
+
+	var s_round = '.s_round';
+  
+	$(s_round).hover(function() {
+	  $('.b_round').toggleClass('b_round_hover');
+	  return false;
+	});
+  
+	$(s_round).click(function() {
+	  $('.flip_box').toggleClass('flipped');
+	  $(this).addClass('s_round_click');
+	  $('.s_arrow').toggleClass('s_arrow_rotate');
+	  $('.b_round').toggleClass('b_round_back_hover');
+	  return false;
+	});
+  
+	$(s_round).on('transitionend', function() {
+	  $(this).removeClass('s_round_click');
+	  $(this).addClass('s_round_back');
+	  return false;
+	});
+  });
 
 $('a[name="logout"]').on("click", function() {
 	uid = firebase.auth().currentUser.uid
@@ -34,6 +57,18 @@ $('a[name="logout"]').on("click", function() {
 			window.location.replace("/revoke/"+uid)
 		})
 	}, 2000);
+})
+
+$('a[name="home"]').on("click", function() {
+	window.location.replace("/home")
+})
+
+$('a[name="exam"]').on("click", function() {
+	window.location.replace("/exam")
+})
+
+$('a[name="profile"]').on("click", function() {
+	// window.location.replace("/profile")
 })
 
 $('.placeholder').on('click', function (ev) {
@@ -56,7 +91,7 @@ $('.placeholder').on('click', function (ev) {
    $('.list__ul').toggle();   
  });
 
-var field2 = new TagSelector(document.getElementById('field2'));
+var question3 = new TagSelector(document.getElementById('question3'));
 
 // const inputElement = document.querySelectorAll('input[type="file"]');
 // inputElement.forEach(function(e) {
@@ -93,3 +128,27 @@ FilePond.setOptions({
 	ignoredFiles: ['.ds_store', 'thumbs.db', 'desktop.ini'],
 	labelIdle: 'Drop files or <span class="filepond--label-action">Browse</span>',
 })
+
+$(document).ready(function() {
+
+	var s_round = '.s_round';
+  
+	$(s_round).hover(function() {
+	  $('.b_round').toggleClass('b_round_hover');
+	  return false;
+	});
+  
+	$(s_round).click(function() {
+	  $('.flip_box').toggleClass('flipped');
+	  $(this).addClass('s_round_click');
+	  $('.s_arrow').toggleClass('s_arrow_rotate');
+	  $('.b_round').toggleClass('b_round_back_hover');
+	  return false;
+	});
+  
+	$(s_round).on('transitionend', function() {
+	  $(this).removeClass('s_round_click');
+	  $(this).addClass('s_round_back');
+	  return false;
+	});
+  });
