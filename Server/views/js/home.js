@@ -10,17 +10,21 @@ firebase.initializeApp(config);
 
 $('button[name="login"]').on("click",function(){
     if($(this).text() == "Login") {
-        email=$('input[name="username"]').val()
-        password=$('input[name="password"]').val()
-        firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            alert(errorMessage)
-        });
+        if($('input[name="password"]').val()=="" || $('input[name="username"]').val()=="") {
+            Jackbox.warning("All fields are required.")
+        } else {
+            email=$('input[name="username"]').val()
+            password=$('input[name="password"]').val()
+            firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                Jackbox.error(errorMessage);
+            });
+        }
     }
     if($(this).text() == "Register") {
         if($('input[name="repeat"]').val()=="" || $('input[name="password"]').val()=="" || $('input[name="code"]').val()=="" || $('input[name="username"]').val()=="") {
-            alert("All fields are required.")
+            Jackbox.warning("All fields are required.")
         } else if($('input[name="password"]').val()==$('input[name="repeat"]').val()) {
             email=$('input[name="username"]').val()
             password=$('input[name="password"]').val()
@@ -31,20 +35,23 @@ $('button[name="login"]').on("click",function(){
             }).then(function(obj) {
                 if(obj.status=="success") {
                     firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-                        var errorCode = error.code;
-                        var errorMessage = error.message;
-                        alert(errorMessage)
+                        // var errorCode = error.code;
+                        // var errorMessage = error.message;
+                        // Jackbox.error(errorMessage);
                         window.location.reload()
                     });
+                } else {
+                    Jackbox.error(obj.status)
                 }
             })
         } else {
-            alert("Passwords do not match.")
+            Jackbox.warning("Passwords do not match.")
         }
     }
 })
 
 document.addEventListener("DOMContentLoaded", function(event) {
+    Jackbox.init();
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
             firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
