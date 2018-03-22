@@ -35,10 +35,9 @@ $('button[name="login"]').on("click",function(){
             }).then(function(obj) {
                 if(obj.status=="success") {
                     firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-                        // var errorCode = error.code;
-                        // var errorMessage = error.message;
-                        // Jackbox.error(errorMessage);
-                        window.location.reload()
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                        Jackbox.error(errorMessage)
                     });
                 } else {
                     Jackbox.error(obj.status)
@@ -54,9 +53,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
     Jackbox.init();
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
-            firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
-                window.location.replace("/"+idToken)
-            })
+            Jackbox.success("Verification successful. Warp core priming...")
+            setTimeout(function(){
+                firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
+                    window.location.replace("/"+idToken)
+                })
+            }, 2000);
         }
     });
 });

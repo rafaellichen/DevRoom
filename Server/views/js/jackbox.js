@@ -4,7 +4,7 @@
 
   lib.settings = {
     notification: {
-      time: 5,
+      time: 2.5,
       actionButtonText: '<i></i>',
       classNames: [],
       icon: '<i></i>'
@@ -106,7 +106,7 @@
 
     actionButton.addEventListener('click', purge);
     notification.addEventListener('mouseenter', resetCounter);
-    notification.addEventListener('click', toggleCounter);
+    // notification.addEventListener('click', toggleCounter);
     notification.addEventListener('mouseleave', startCounter);
 
     document.getElementById("jackbox").appendChild(notification);

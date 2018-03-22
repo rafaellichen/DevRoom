@@ -1,3 +1,7 @@
+@font-face {
+  font-family: Poppins-Bold;
+  src: url('../fonts/poppins/Poppins-Bold.ttf'); 
+}
 .sidebyside {
   width: 75%;
 }
@@ -23,7 +27,7 @@
 }
 
 .wrapper {
-  font-size: 20px;
+  font-size: 25px;
 }
 
 .list {
@@ -120,11 +124,13 @@
 }
 .contact main section .content aside h1 {
   font-weight: 100;
-  font-size: 22px;
-  margin-bottom: 10px;
+  font-size: 44px;
+  margin-bottom: 30px;
+  font-family: Poppins-Bold;
+  text-decoration: underline;
 }
 .contact main section .content aside p {
-  font-size: 14px;
+  font-size: 25px;
   letter-spacing: .5px;
   line-height: 160%;
 }
@@ -171,7 +177,10 @@ body {
   font-size: 1.6rem;
   font-family: "Source Sans Pro", sans-serif;
   color: #003c5d;
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
+  /* background-image: url("/images/bg1.jpg"); */
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 a {
@@ -530,7 +539,7 @@ main content basic style
   z-index: 1;
   min-height: 100vh;
   padding: 100px 0;
-  background-color: white;
+  /* background-color: white; */
 }
 
 /* -------------------------------- 

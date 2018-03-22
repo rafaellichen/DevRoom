@@ -54,3 +54,5 @@ $('.placeholder').on('click', function (ev) {
 
 var field2 = new TagSelector(document.getElementById('field2'));
 
+const inputElement = document.querySelector('input[type="file"]');
+const pond = FilePond.create( inputElement );
