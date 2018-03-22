@@ -60,7 +60,9 @@ $('a[name="logout"]').on("click", function() {
 })
 
 $('a[name="home"]').on("click", function() {
-	window.location.replace("/home")
+	firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
+		window.location.replace("/"+idToken)
+	})
 })
 
 $('a[name="exam"]').on("click", function() {

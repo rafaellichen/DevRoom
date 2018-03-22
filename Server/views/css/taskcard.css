@@ -30,15 +30,13 @@
     .band {
       grid-template-columns: 1fr 1fr;
     }  
-    .item-1 {
-    grid-column: 1/ span 2;
-    }
-    .item-1 h1 {
-      font-size: 30px;
+  }
+  @media only screen and (min-width: 850px) {
+    .band {
+      grid-template-columns: 1fr 1fr 1fr;
     }
   }
-  
-  @media only screen and (min-width: 850px) {
+  @media only screen and (min-width: 1100px) {
     .band {
       grid-template-columns: 1fr 1fr 1fr 1fr;
     }
@@ -61,7 +59,7 @@
   }
   
   .card:hover {
-    top: -2px;
+    /* top: -2px; */
     box-shadow: 0 4px 5px rgba(0,0,0,0.2);
   }
   
@@ -93,10 +91,100 @@
   }
   
   .card span {
+    z-index: 2;
+    text-align: center;
     font-size: 12px;
     font-weight: bold;
-    color: #999;
+    color: black;
     text-transform: uppercase;
     letter-spacing: .05em;
     margin: 2em 0 0 0;
   }
+
+
+
+  .box {
+    /* width: 300px; */
+    height: 300px;
+    border-radius: 11px;
+    /* box-shadow: 0 2px 30px rgba(0, 0, 0, 0.2); */
+    /* background: #fbfcee; */
+    position: relative;
+    overflow: hidden;
+    transform: translate3d(0, 0, 0);
+  }
+  .box:hover {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+  }
+  
+  .wave {
+    opacity: .5;
+    position: absolute;
+    top: 550px;
+    left: 50px;
+    background: #57b846;
+    width: 700px;
+    height: 700px;
+    margin-left: -250px;
+    margin-top: -250px;
+    transform-origin: 50% 48%;
+    border-radius: 40%;
+    animation: drift 3000ms infinite linear;
+  }
+
+  .wave.-three {
+    animation: drift 5000ms infinite linear;
+  }
+  
+  .wave.-two {
+    animation: drift1 7000ms infinite linear;
+    opacity: .1;
+    background: yellow;
+  }
+  .box:after {
+    content: '';
+    display: block;
+    left: 0;
+    top: -2px;
+    width: 100%;
+    height: 100%;
+    /* background: linear-gradient(to bottom, #ee88aa, rgba(221, 238, 255, 0) 80%, rgba(255, 255, 255, 0.5)); */
+    z-index: 11;
+    transform: translate3d(0, 0, 0);
+  }
+  
+  .title {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    line-height: 300px;
+    text-align: center;
+    transform: translate3d(0, 0, 0);
+    color: white;
+    text-transform: uppercase;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: .4em;
+    font-size: 24px;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+    text-indent: .3em;
+  }
+  
+  @keyframes drift {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes drift1 {
+    from {
+      transform: rotate(360deg);
+    }
+    to {
+      transform: rotate(0deg);
+    }
+  }
+  
