@@ -2,15 +2,24 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+        //- link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+        link(rel="stylesheet", href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css")
+        //- link(rel="stylesheet", href="https://unpkg.com/filepond/dist/filepond.min.css")
+        script(src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.min.js")
+        script(src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.min.js")
+        script(src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.min.js")
+        script(src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js")
+        //- script(src="https://unpkg.com/filepond/dist/filepond.min.js")
         //- <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
         style
             include css/style.css
             include css/tagselector.css
-            include css/filepond.css
+            //- include css/filepond.css
+            include css/filepond.min.css
+            include css/jackbox.css
         //-     include css/prism.min.css
         //-     include css/codeflask.css
         //- style.
@@ -118,12 +127,7 @@
                         </section>
                         <div class="content" id="bottom">
                             <aside>
-                                <div class="demo" id="demo">
-                                    <div class="filepond-wrapper">
-                                        <input type="file" name="filepond" multiple data-max-files="2" data-max-file-size="3MB"/>
-                                    </div>
-                                </div>
-                                <input type="file">
+                                <input type="file" class="filepond" name="filepond" multiple data-max-file-size="3MB" data-max-files="3" />
                             </aside>
                         </div>
                     </main>
@@ -135,7 +139,9 @@
         include js/modernizr.js
         include js/jquery-2.1.4.js
         include js/tagselector.js
-        include js/filepond.js
+        //- include js/filepond.js
+        include js/filepond.min.js
+        include js/jackbox.js
         include js/main.js
     //-     include js/prism.min.js
     //-     include js/codeflask.js

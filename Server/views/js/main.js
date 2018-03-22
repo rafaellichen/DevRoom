@@ -9,6 +9,7 @@ var config = {
 firebase.initializeApp(config);
 
 jQuery(document).ready(function(){
+	Jackbox.init()
 	if( $('.cd-stretchy-nav').length > 0 ) {
 		var stretchyNavs = $('.cd-stretchy-nav');
 		stretchyNavs.each(function(){
@@ -27,9 +28,12 @@ jQuery(document).ready(function(){
 
 $('a[name="logout"]').on("click", function() {
 	uid = firebase.auth().currentUser.uid
-	firebase.auth().signOut().then(function() {
-		window.location.replace("/revoke/"+uid)
-	})
+	Jackbox.information("Logging out. Energize!")
+	setTimeout(function(){
+		firebase.auth().signOut().then(function() {
+			window.location.replace("/revoke/"+uid)
+		})
+	}, 2000);
 })
 
 $('.placeholder').on('click', function (ev) {
@@ -54,12 +58,38 @@ $('.placeholder').on('click', function (ev) {
 
 var field2 = new TagSelector(document.getElementById('field2'));
 
-const inputElement = document.querySelectorAll('input[type="file"]');
-inputElement.forEach(function(e) {
-	var pond = FilePond.create(e);
-})
-FilePond.setOptions({
+// const inputElement = document.querySelectorAll('input[type="file"]');
+// inputElement.forEach(function(e) {
+// 	var pond = FilePond.create(e);
+// })
+// FilePond.setOptions({
+// 	ignoredFiles: ['.ds_store', 'thumbs.db', 'desktop.ini'],
+// 	labelIdle: 'Drop files or <span class="filepond--label-action">Browse</span>',
+// })
+
+/*
+We want to preview images, so we need to register the Image Preview plugin
+*/
+FilePond.registerPlugin(
 	
+	// encodes the file as base64 data
+  FilePondPluginFileEncode,
+	
+	// validates the size of the file
+	FilePondPluginFileValidateSize,
+	
+	// corrects mobile image orientation
+	FilePondPluginImageExifOrientation,
+	
+	// previews dropped images
+  FilePondPluginImagePreview
+);
+
+// Select the file input and use create() to turn it into a pond
+FilePond.create(
+	document.querySelector('input')
+);
+FilePond.setOptions({
 	ignoredFiles: ['.ds_store', 'thumbs.db', 'desktop.ini'],
-	labelIdle: 'Drag & Drop files or <span class="filepond--label-action">Browse</span>',
+	labelIdle: 'Drop files or <span class="filepond--label-action">Browse</span>',
 })
