@@ -33,11 +33,13 @@ $('a[name="logout"]').on("click", function() {
 })
 
 $('.placeholder').on('click', function (ev) {
-  $('.placeholder').css('opacity', '0');
+  	$('.placeholder').css('opacity', '0');
 //   var length = $('.list__ul').children('li').length;
 //   $('.wrapper').css('height', 88*length+"px");
-  $('.list__ul').toggle();
-  $(this).text( $(this).text() ).css('opacity', '1');
+	if($(this).text()=="?")
+		$('.list__ul').children('li').first().hide()
+  	$('.list__ul').toggle();
+  	$(this).text( $(this).text() ).css('opacity', '1');
 });
 
  $('.list__ul a').on('click', function (ev) {
