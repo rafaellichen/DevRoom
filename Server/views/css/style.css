@@ -72,7 +72,9 @@
 }
 .list a:hover {
   cursor: pointer;
+  color: #eb7999;
   /* color: rgb(235,121,153); */
+  /* color: rgb(234,108,142); */
   border-bottom: 5px solid;
 }
 /* .list a:hover:after {
