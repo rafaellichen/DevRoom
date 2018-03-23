@@ -66,7 +66,7 @@ $('a[name="home"]').on("click", function() {
 })
 
 $('a[name="exam"]').on("click", function() {
-	window.location.replace("/exam")
+	// window.location.replace("/exam")
 })
 
 $('a[name="profile"]').on("click", function() {

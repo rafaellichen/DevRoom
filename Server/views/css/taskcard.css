@@ -66,7 +66,7 @@
   .card article {
     padding: 20px;
     display: flex;
-    
+    height: 100%;
     flex: 1;
     justify-content: space-between;
     flex-direction: column;
@@ -120,8 +120,8 @@
   .wave {
     opacity: .5;
     position: absolute;
-    top: 550px;
-    left: 50px;
+    top: 540px;
+    left: 80px;
     background: #57b846;
     width: 700px;
     height: 700px;
