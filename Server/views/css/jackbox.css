@@ -17,13 +17,12 @@
 	font-family: Poppins-SemiBold;
 	src: url('../fonts/poppins/Poppins-SemiBold.ttf'); 
   }
+
 .notifications{
 	position: fixed;
 	bottom: 0;
 	left: 0;
 	right: 0;
-	z-index: 2;
-	text-align: center;
 	font-family: Poppins-SemiBold;
 }
 
@@ -39,7 +38,7 @@
 }
 
 .notification.show{
-	height: 100%;
+	height: 50px;
 }
 
 .notification .icon, .notification .message, .notification .action{

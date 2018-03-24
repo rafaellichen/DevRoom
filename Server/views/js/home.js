@@ -53,10 +53,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
     Jackbox.init();
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
-            Jackbox.success("Verification successful. Warp core priming...")
+            Jackbox.success("Verification successful. Maximum warp.")
             setTimeout(function(){
                 firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
-                    window.location.replace("/"+idToken)
+                    window.location.replace("/user/"+idToken)
                 })
             }, 2000);
         }

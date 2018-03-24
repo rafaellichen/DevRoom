@@ -47,21 +47,22 @@
   .card {
     border-radius: 11px;
     min-height: 100%;
+    width: 100%;
     background: rgb(111,111,111);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    /* box-shadow: 0 2px 5px rgba(0,0,0,0.1); */
     display: flex;
     flex-direction: column;
     text-decoration: none;
-    color: #444;
+    /* color: white; */
     position: relative;
     top: 0;
     transition: all .1s ease-in;
   }
   
-  .card:hover {
-    /* top: -2px; */
+  /* .card:hover {
+    top: -2px;
     box-shadow: 0 4px 5px rgba(0,0,0,0.2);
-  }
+  } */
   
   .card article {
     padding: 20px;
@@ -87,24 +88,23 @@
   .band h1 {
     font-size: 20px;
     margin: 0;
-    color: #333;
+    color: white;
   }
   
   .card span {
     z-index: 2;
     text-align: center;
-    font-size: 12px;
+    font-size: 22px;
     font-weight: bold;
-    color: black;
+    color: white;
+    font-family: Poppins-Bold;
     text-transform: uppercase;
     letter-spacing: .05em;
     margin: 2em 0 0 0;
   }
 
-
-
   .box {
-    /* width: 300px; */
+    width: 101%;
     height: 300px;
     border-radius: 11px;
     /* box-shadow: 0 2px 30px rgba(0, 0, 0, 0.2); */
@@ -114,14 +114,14 @@
     transform: translate3d(0, 0, 0);
   }
   .box:hover {
-    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   }
   
   .wave {
     opacity: .5;
     position: absolute;
-    top: 540px;
-    left: 80px;
+    top: 480px;
+    left: 30%;
     background: #57b846;
     width: 700px;
     height: 700px;
@@ -162,7 +162,7 @@
     line-height: 300px;
     text-align: center;
     transform: translate3d(0, 0, 0);
-    color: white;
+    /* color: white; */
     text-transform: uppercase;
     font-family: 'Playfair Display', serif;
     letter-spacing: .4em;

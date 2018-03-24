@@ -16,11 +16,13 @@
         //- <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
         style
             include css/style.css
-            include css/tagselector.css
             //- include css/filepond.css
             include css/filepond.min.css
             include css/jackbox.css
-            include css/taskcard.css
+            if home
+                include css/taskcard.css
+            if exam
+                include css/tagselector.css
         //-     include css/prism.min.css
         //-     include css/codeflask.css
         //- style.
@@ -53,12 +55,13 @@
     script
         include js/modernizr.js
         include js/jquery-2.1.4.js
-        if exam
-            include js/tagselector.js
-        //- include js/filepond.js
         include js/filepond.min.js
         include js/jackbox.js
+        if exam
+            include js/tagselector.js
+            include js/exam.js
         include js/main.js
+        //- include js/filepond.js
     //-     include js/prism.min.js
     //-     include js/codeflask.js
     //- script.

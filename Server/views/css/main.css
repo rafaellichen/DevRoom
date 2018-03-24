@@ -155,7 +155,7 @@ iframe {
 }
 
 .container-login100 {
-  width: 100%;  
+  width: 100%;
   height: 100vh;
   display: -webkit-box;
   display: -webkit-flex;
@@ -166,7 +166,7 @@ iframe {
   justify-content: center;
   align-items: center;
   padding: 15px;
-  background-image: url("/images/bg.png");
+  background-image: url("/images/bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
