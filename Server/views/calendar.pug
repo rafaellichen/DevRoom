@@ -1,4 +1,4 @@
-h1 This is a date
+h1 This is example section
 <div class="band">
     <div class='box'>
         <a href="/exam" class="card">
@@ -24,18 +24,24 @@ h1 This is a date
         </a>
     </div>
 </div>
+p Below this line is dynamic data
+p -----------
 for each in examcard
-    h1 This is a date
+    h1 #{each[0]}
     <div class="band">
-        for detail in each
-            <div class="box">
-                <a href="/exam" class="card">
-                <article>
-                    h1 #{detail[1]}
-                    span #{detail[2]}
-                </article>
-                </a>
-            </div>
+    for detail in each.slice(1) 
+        <div class="box">
+            <a href="/exam" class="card">
+            <article>
+                h1 #{detail[1]}
+                span #{detail[2]}
+            </article>
+            </a>
+            if(detail[3])
+                <div class='wave'></div>
+                <div class='wave -two'></div>
+                <div class='wave -three'></div>
+        </div>
     </div>
 //- h1 Today
 //- <div class="band">

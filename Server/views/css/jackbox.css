@@ -24,6 +24,7 @@
 	left: 0;
 	right: 0;
 	font-family: Poppins-SemiBold;
+	z-index: 11;
 }
 
 .notification{

@@ -147,7 +147,7 @@ app.get('/user/:idToken',function(req,res) {
         minute = today.getMinutes()
         if (Number(hour)<10) hour = '0'+hour
         if (Number(minute)<10) minute = '0'+minute
-        var currenttime = hour+minute
+        var currenttime = String(hour)+String(minute)
         exams.once("value", function(snapshot) {
           result = Object.values(snapshot.val())
           quizkeys = Object.keys(snapshot.val())
@@ -157,31 +157,6 @@ app.get('/user/:idToken',function(req,res) {
           quizkeys = quizkeys.filter(function(e) {
             return Number(e.slice(0,8)) >= Number(timecode) && Number(e.slice(0,8)) <= Number(timecode2) 
           })
-          // [ { date: '03222018',
-          //     duration: 0.5,
-          //     name: 'past exam',
-          //     start: 1950 },
-          //   { date: '03232018',
-          //     duration: 1.5,
-          //     name: 'first quiz',
-          //     start: 1910 },
-          //   { date: '03232018',
-          //     duration: 0.1,
-          //     name: 'simple task',
-          //     start: 2000 },
-          //   { date: '03242018',
-          //     duration: 1.5,
-          //     name: 'second quiz',
-          //     start: 1910 },
-          //   { date: '03252018',
-          //     duration: 1.5,
-          //     name: 'third quiz',
-          //     start: 1910 } ]
-          // [ '032220181950qweqwe',
-          //   '032320181910aaaaaaa',
-          //   '032320182000zxczxc',
-          //   '032420181910abcdefg',
-          //   '032520181910rrrrrr' ]
           final = []
           tempfinal = []
           currfinal = ""
@@ -202,8 +177,12 @@ app.get('/user/:idToken',function(req,res) {
           final.push(tempfinal)
           for(var i=0; i<final.length; i++) {
             for(var j=0; j<final[i].length; j++) {
-              final[i][j]=[final[i][j],result[quizkeys.indexOf(final[i][j])].name,result[quizkeys.indexOf(final[i][j])].start]
+              final[i][j]=[final[i][j],
+                          result[quizkeys.indexOf(final[i][j])].name,
+                          result[quizkeys.indexOf(final[i][j])].start,
+                          examStarted(currenttime,result[quizkeys.indexOf(final[i][j])].date,timecode,result[quizkeys.indexOf(final[i][j])].start)]
             }
+            final[i].unshift([textDate(final[i][0][0].slice(0,8))])
           }
           console.log(final)
           res.render('student',{home: true, exam: false, examcard: final})
@@ -217,5 +196,16 @@ app.get('/user/:idToken',function(req,res) {
     res.render('home');
   });
 });
+
+function examStarted(cur, date, today, time) {
+  if(cur>time && date==today) return true
+  else return false
+}
+
+function textDate(examDate) {
+  var parts =String(examDate.slice(4)+"-"+examDate.slice(0,2)+"-"+examDate.slice(2,4)).split('-');
+  var mydate = new Date(parts[0], parts[1] - 1, parts[2]); 
+  return mydate.toDateString().split(" ").slice(0,3).join(" ")
+}
 
 app.listen(PORT, () => console.log(`Listening on http://localhost:${ PORT }`))
