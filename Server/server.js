@@ -32,7 +32,6 @@ function write() {
     status: 0
   })
 }
-// write()
 
 function signup() {
   admin.auth().createUser({
@@ -56,7 +55,7 @@ function profile() {
 const express	= require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const sqlite3 = require("sqlite3").verbose();
+// const sqlite3 = require("sqlite3").verbose();
 // const db = new sqlite3.Database("devroom.db")
 const PORT = process.env.PORT || 3000
 
@@ -67,13 +66,9 @@ app.get('/',function(req,res) {
   res.render('home');
 });
 
-app.get('/exam',function(req,res) {
-  res.render('student', {home: false, exam: true})
-})
-
-app.get('/home',function(req,res) {
-  res.render('student', {home: true, exam: false})
-})
+// app.get('/home',function(req,res) {
+//   res.render('student', {home: true, exam: false})
+// })
 
 app.get('/register/:username/:code/:password',function(req,res) {
   password = req.params.password
@@ -111,10 +106,38 @@ app.get('/revoke/:uid',function(req,res) {
   res.render("home")
 })
 
-app.get('/user/:idToken/exam/:examid',function(req,res) {
-  idToken = req.params.idToken
-  examid = req.params.examid
-  console.log(examid)
+app.get('/exam/:examididToken',function(req,res) {
+  idToken = req.params.examididToken.slice(32)
+  examid = req.params.examididToken.slice(0,32)
+  let checkRevoked = true;
+  admin.auth().verifyIdToken(idToken, checkRevoked)
+  .then(function(decodedToken) {
+    var uid = decodedToken.uid
+    var ref = db.ref("user/"+uid)
+    ref.once("value", function(snapshot) {
+      if(snapshot.val().permission==0) {
+        var questions = db.ref("questions/")
+        questions.once("value", function(snapshot) {
+          thisexam = snapshot.val()[examid]
+          questionkeys = Object.keys(thisexam)
+          allquestions = []
+          questionkeys.forEach(function(element) {
+            obj = thisexam[element]
+            obj["questionNum"] = "Question "+element.slice(1)
+            obj["choice"] = obj["choice"].split("<!>")
+            allquestions.push(obj)
+          })
+          console.log(allquestions)
+          res.render('student', {home: false, exam: true, questions: allquestions})
+        })
+      }
+    })
+  }).catch(function(error) {
+    res.render('home');
+  });
+  // admin.database().ref().child('posts').push().key;
+  // -L8dhkOiGQI7J0pQafZF length: 20 chars
+  // res.render('student', {home: false, exam: true})
 });
 
 app.get('/user/:idToken',function(req,res) {
@@ -184,7 +207,7 @@ app.get('/user/:idToken',function(req,res) {
             }
             final[i].unshift([textDate(final[i][0][0].slice(0,8))])
           }
-          console.log(final)
+          // console.log(final)
           res.render('student',{home: true, exam: false, examcard: final})
         })
       }

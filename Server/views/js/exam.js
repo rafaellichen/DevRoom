@@ -18,7 +18,11 @@ $('.placeholder').on('click', function (ev) {
    $('.list__ul').toggle();   
  });
 
-var question3 = new TagSelector(document.getElementById('question3'));
+var allmultiple = document.querySelectorAll('select[name="mc"]')
+allmultiple.forEach(function(e) {
+	news = new TagSelector(e)
+})
+
 
 // const inputElement = document.querySelectorAll('input[type="file"]');
 // inputElement.forEach(function(e) {

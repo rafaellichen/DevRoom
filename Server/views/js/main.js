@@ -65,12 +65,14 @@ $('a[name="home"]').on("click", function() {
 	})
 })
 
-$('a[name="exam"]').on("click", function() {
-	// window.location.replace("/exam")
-})
-
 $('a[name="profile"]').on("click", function() {
 	// window.location.replace("/profile")
 })
 
+$('a[name="examLink"]').on("click", function() {
+	examid = $(this).attr('id')
+	firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
+		window.location.replace("/exam/"+examid+idToken)
+	})
+})
 

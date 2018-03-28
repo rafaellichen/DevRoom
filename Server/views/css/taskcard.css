@@ -112,6 +112,7 @@
     position: relative;
     overflow: hidden;
     transform: translate3d(0, 0, 0);
+    cursor: pointer;
   }
   .box:hover {
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
