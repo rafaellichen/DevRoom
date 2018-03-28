@@ -12,6 +12,7 @@
         script(src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.min.js")
         script(src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.min.js")
         script(src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js")
+        <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
         //- script(src="https://unpkg.com/filepond/dist/filepond.min.js")
         //- <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
         style
@@ -23,14 +24,17 @@
                 include css/taskcard.css
             if exam
                 include css/tagselector.css
-        //-     include css/prism.min.css
-        //-     include css/codeflask.css
-        //- style.
-        //-     .codeview {
-        //-         height:222px;
-        //-         border:1px solid #ccc;
-        //-         background:#f5f5f5;
-        //-     }
+                include css/prism.min.css
+                include css/codeflask.css
+        if exam
+            style.
+                .codeview {
+                    width:100%;
+                    height: 333px;
+                    border:1px solid #ccc;
+                    background:#f5f5f5;
+                    position:relative;
+                }
     </head>
     <body>
         <header>
@@ -60,13 +64,14 @@
         if exam
             include js/tagselector.js
             include js/exam.js
+            include js/prism.min.js
+            include js/codeflask.js
         include js/main.js
-        //- include js/filepond.js
-    //-     include js/prism.min.js
-    //-     include js/codeflask.js
-    //- script.
-    //-     var flask = new CodeFlask
-    //-     flask.run('#code', {
-    //-         language: 'js'
-    //-     });
+    if exam
+        script.
+            var flask = new CodeFlask
+            flask.run('#code', {
+                language: 'js'
+            });
+        //- include js/filepond.js 
 </html>

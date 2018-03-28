@@ -127,7 +127,6 @@ app.get('/exam/:examididToken',function(req,res) {
             obj["choice"] = obj["choice"].split("<!>")
             allquestions.push(obj)
           })
-          console.log(allquestions)
           res.render('student', {home: false, exam: true, questions: allquestions})
         })
       }

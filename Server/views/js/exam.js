@@ -23,6 +23,21 @@ allmultiple.forEach(function(e) {
 	news = new TagSelector(e)
 })
 
+// $('textarea').each(function () {
+//   this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
+// }).on('input', function () {
+//   this.style.height = 'auto';
+//   this.style.height = (this.scrollHeight) + 'px';
+// });
+
+$('div[id="code"]').on('input', function () {
+	// this.style.height = 'auto';
+	// console.log("-------------")
+	// console.log($(this).children(".CodeFlask__textarea").scrollTop())
+	// console.log($(this).children(".CodeFlask__textarea").height())
+	// if($(this).children(".CodeFlask__textarea").scrollTop())
+	// 	this.style.height = $(this).children(".CodeFlask__textarea").scrollTop()*5 + $(this).children(".CodeFlask__textarea").height() + 'px';
+});
 
 // const inputElement = document.querySelectorAll('input[type="file"]');
 // inputElement.forEach(function(e) {
