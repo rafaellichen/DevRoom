@@ -18,8 +18,10 @@
   },
   "homepage": "https://github.com/rafaellichen/DevRoom#readme",
   "dependencies": {
+    "express": "^4.16.3",
     "firebase-admin": "^5.11.0",
-    "nodemon": "^1.17.2"
+    "nodemon": "^1.17.2",
+    "pug": "^2.0.3"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
