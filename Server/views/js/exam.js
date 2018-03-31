@@ -97,4 +97,38 @@ $(document).ready(function() {
 	  $(this).addClass('s_round_back');
 	  return false;
 	});
-  });
+});
+
+document.getElementById("submit").addEventListener("click", function(){
+	console.log("this is submit")
+	allresponses = document.querySelectorAll('aside[attribute="question"]')
+	responsesubmit = []
+	allresponses.forEach(function(curq) {
+		if(curq.getAttribute("name")=="text input") {
+			responsesubmit.push(curq.id)
+			code = document.getElementById(curq.id).getElementsByClassName("CodeFlask__code")[0].innerHTML
+			responsesubmit.push(code)
+		}
+		if(curq.getAttribute("name")=="multiple choice") {
+			allchoices = document.getElementById(curq.id).getElementsByClassName("active")
+			answer = []
+			for(var i=0; i<allchoices.length; i++) {
+				answer.push(allchoices[i].innerHTML)
+			}
+			responsesubmit.push(curq.id)
+			responsesubmit.push(answer.join("<!>"))
+		}
+		if(curq.getAttribute("name")=="single choice") {
+			responsesubmit.push(curq.id)
+			responsesubmit.push(document.getElementById(curq.id).getElementsByClassName("placeholder")[0].innerHTML)
+		}
+		if(curq.getAttribute("name")=="file submission") {
+			console.log(pond.files);
+		}
+	})
+	console.log(responsesubmit)
+});
+
+document.getElementById("save").addEventListener("click", function(){
+	console.log("this is save")
+});
