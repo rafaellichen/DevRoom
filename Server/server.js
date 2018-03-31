@@ -173,6 +173,7 @@ app.get('/user/:idToken',function(req,res) {
         exams.once("value", function(snapshot) {
           result = Object.values(snapshot.val())
           quizkeys = Object.keys(snapshot.val())
+          console.log(result)
           result = result.filter(function(e, index) {
             return Number(e.date) >= Number(timecode) && Number(e.date) <= Number(timecode2)
           })
@@ -197,6 +198,8 @@ app.get('/user/:idToken',function(req,res) {
               }
           });
           final.push(tempfinal)
+          console.log(final)
+          console.log(quizkeys)
           for(var i=0; i<final.length; i++) {
             for(var j=0; j<final[i].length; j++) {
               final[i][j]=[final[i][j],

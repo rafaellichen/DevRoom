@@ -11,8 +11,8 @@
                             </aside>
                         </div>
                     </section>
-                    <div class="content" id="bottom">
-                        <aside>
+                    div(name="question" class="content" id="bottom")
+                        aside(name=eachQ.type id=eachQ.questionNum attribute="question")
                             if eachQ.type == "single choice"
                                 <div class="wrapper typo">
                                     <div class="list"><span class="placeholder">?</span>
@@ -31,15 +31,13 @@
                                 <input type="file" class="filepond" name="filepond" multiple data-max-file-size="3MB" data-max-files="3" />
                             if eachQ.type == "text input"
                                 <div class="codeview" id="code"></div>
-                        </aside>
-                    </div>
                 </main>
             </div>
     </div>
-    <div class="container-login100-form-btn">
-        <button name="login" class="login100-form-btn">Submit</button>
-    </div>
+    <button id="save">Save</button>
+    <button id="submit">Submit</button>
 </main>
+
 //- p -----------
 //- p dynamic questions above
 //- <main class="cd-main-content">
