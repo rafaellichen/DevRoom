@@ -3,7 +3,27 @@
 Primary style
 
 -------------------------------- */
-*, *::after, *::before {
+
+@font-face {
+  font-family: Poppins-Regular;
+  src: url('../fonts/poppins/Poppins-Regular.ttf'); 
+}
+
+@font-face {
+  font-family: Poppins-Medium;
+  src: url('../fonts/poppins/Poppins-Medium.ttf'); 
+}
+
+@font-face {
+  font-family: Poppins-Bold;
+  src: url('../fonts/poppins/Poppins-Bold.ttf'); 
+}
+
+@font-face {
+  font-family: Poppins-SemiBold;
+  src: url('../fonts/poppins/Poppins-SemiBold.ttf'); 
+}
+/* *, *::after, *::before {
     box-sizing: border-box;
   }
   
@@ -25,7 +45,7 @@ Primary style
   
   img {
     max-width: 100%;
-  }
+  } */
   
   /* -------------------------------- 
   
@@ -321,6 +341,7 @@ Primary style
   }
   .no-touch .cd-stretchy-nav.nav-is-visible ul a:hover::after {
     opacity: 1;
+    text-decoration: none;
   }
   .no-touch .cd-stretchy-nav.nav-is-visible ul a:hover span {
     -webkit-transform: translateX(-5px);

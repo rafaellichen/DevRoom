@@ -23,13 +23,6 @@ allmultiple.forEach(function(e) {
 	news = new TagSelector(e)
 })
 
-// $('textarea').each(function () {
-//   this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
-// }).on('input', function () {
-//   this.style.height = 'auto';
-//   this.style.height = (this.scrollHeight) + 'px';
-// });
-
 $('div[id="code"]').on('input', function () {
 	// this.style.height = 'auto';
 	// console.log("-------------")
@@ -38,40 +31,6 @@ $('div[id="code"]').on('input', function () {
 	// if($(this).children(".CodeFlask__textarea").scrollTop())
 	// 	this.style.height = $(this).children(".CodeFlask__textarea").scrollTop()*5 + $(this).children(".CodeFlask__textarea").height() + 'px';
 });
-
-// FilePond.registerPlugin(
-// 	FilePondPluginFileEncode,
-// 	FilePondPluginFileValidateSize,
-// 	FilePondPluginImageExifOrientation,
-// 	FilePondPluginImagePreview
-// );
-// const inputElement = document.querySelectorAll('input[type="file"]');
-// inputElement.forEach(function(e) {
-// 	console.log(e.id)
-// 	FilePond.create(
-// 		document.querySelector(String(e.id))
-// 	);
-// 	console.log(e.id.split(" ").join(""))
-// 	console.log(e)
-// 	eval(e.id.split(" ").join("") + " = " + "FilePond.create(e)");
-// 	eval(e.id.split(" ").join("")+`.setOptions({
-// 		ignoredFiles: ['.ds_store', 'thumbs.db', 'desktop.ini'],
-// 		labelIdle: 'Drop files or <span class="filepond--label-action">Browse</span>',
-// 	})`);
-// 	pond.setOptions({
-// 		ignoredFiles: ['.ds_store', 'thumbs.db', 'desktop.ini'],
-// 		labelIdle: 'Drop files or <span class="filepond--label-action">Browse</span>',
-// 	})
-// })
-
-// Select the file input and use create() to turn it into a pond
-// FilePond.create(
-// 	document.querySelectorAll('input')
-// );
-// FilePond.setOptions({
-// 	ignoredFiles: ['.ds_store', 'thumbs.db', 'desktop.ini'],
-// 	labelIdle: 'Drop files or <span class="filepond--label-action">Browse</span>',
-// })
 
 $(document).ready(function() {
 
@@ -140,7 +99,7 @@ document.getElementById("submit").addEventListener("click", function(){
 			else responsesubmit.push(downf.join("<!>"))
 		}
 	})
-	console.log(responsesubmit)
+	// console.log(responsesubmit)
 	responsesubmit.push(firebase.auth().currentUser.uid)
 	responsesubmit.push(document.getElementsByName("thiswillbeexamid")[0].getAttribute("id"))
 	$.ajax({
@@ -151,6 +110,11 @@ document.getElementById("submit").addEventListener("click", function(){
 		},
 		success: function(data){
 			Jackbox.success("Submission Successful");
+			setTimeout(function(){
+				firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
+						window.location.replace("/user/"+idToken)
+				})
+			}, 2000);
 		}
 });
 });

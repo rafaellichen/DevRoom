@@ -2,34 +2,38 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+        //- link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
         //- <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
         style
-            include css/instructor.css
+            //- include css/instructor.css
+            include css/style.css
+            include css/jackbox.css
+            if home
+                include css/taskcard.css
     </head>
     <body>
         <header>
             <nav class="cd-stretchy-nav">
                 <a class="cd-nav-trigger" href="javascript:void(0)"><span aria-hidden="true"></span></a>
                 <ul>
-                    <li><a href="javascript:void(0)"><span>Home</span></a></li>
-                    <li><a href="javascript:void(0)"><span>Exam</span></a></li>
-                    <li><a href="javascript:void(0)"><span>Roster</span></a></li>
-                    <li><a href="javascript:void(0)"><span>Setting</span></a></li>
-                    <li><a name="logout" href="javascript:void(0)"><span>Logout</span></a></li>
+                    <li><a href="javascript:void(0)"></span></a></li>
+                    <li><a href="javascript:void(0)"></span></a></li>
+                    <li><a href="javascript:void(0)"></span></a></li>
+                    <li><a href="javascript:void(0)"></span></a></li>
+                    <li><a name="logout" href="javascript:void(0)"></span></a></li>
                 </ul>
                 <span aria-hidden="true" class="stretchy-nav-bg"></span>
             </nav>
         </header>
-        <main class="cd-main-content">
-            h1 instructor
-        </main>
+        if home
+            include calendar.pug
     </body>
     script
         include js/modernizr.js
         include js/jquery-2.1.4.js
+        include js/jackbox.js
         include js/main.js
 </html>
