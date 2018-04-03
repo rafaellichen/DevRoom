@@ -2,51 +2,10 @@ const admin = require("firebase-admin");
 const serviceAccount = require("./c4q-grading-system-firebase-adminsdk-auy6d-1256425416.json");
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://c4q-grading-system.firebaseio.com"
+  databaseURL: "https://c4q-grading-system.firebaseio.com",
 });
+
 const db = admin.database();
-
-function write() {
-  db.ref("grade/hihihihi/abcdefg").set({
-    grade: 0,
-    q1: {
-      check: 0,
-      grade: 0,
-      response: "none"
-    },
-    q2: {
-      check: 0,
-      grade: 0,
-      response: "none"
-    },
-    q3: {
-      check: 0,
-      grade: 0,
-      response: "none"
-    },
-    q4: {
-      check: 0,
-      grade: 0,
-      response: "none"
-    },
-    status: 0
-  })
-}
-
-function signup() {
-  admin.auth().createUser({
-    email: "admin@gmail.com",
-    password: "password",
-  })
-  .then(function(userRecord) {
-    // See the UserRecord reference doc for the contents of userRecord.
-    console.log("Successfully created new user:", userRecord.uid);
-  })
-  .catch(function(error) {
-    console.log("Error creating new user:", error);
-  });
-}
-// signup()
 
 function profile() {
   // https://firebase.google.com/docs/auth/admin/manage-users
@@ -61,14 +20,13 @@ const PORT = process.env.PORT || 3000
 
 app.set('view engine', 'pug')
 app.use(express.static(__dirname + '/views'));
-
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
 app.get('/',function(req,res) {
   res.render('home');
 });
-
-// app.get('/home',function(req,res) {
-//   res.render('student', {home: true, exam: false})
-// })
 
 app.get('/register/:username/:code/:password',function(req,res) {
   password = req.params.password
@@ -125,8 +83,10 @@ app.get('/exam/:examididToken',function(req,res) {
             obj = thisexam[element]
             obj["questionNum"] = "Question "+element.slice(1)
             obj["choice"] = obj["choice"].split("<!>")
+            obj["examid"] = examid
             allquestions.push(obj)
           })
+          // console.log(allquestions)
           res.render('student', {home: false, exam: true, questions: allquestions})
         })
       }
@@ -138,6 +98,23 @@ app.get('/exam/:examididToken',function(req,res) {
   // -L8dhkOiGQI7J0pQafZF length: 20 chars
   // res.render('student', {home: false, exam: true})
 });
+
+app.post('/submitresponse', function(req, res){
+  data = req.body.responsesubmit
+  path = "grade/"+data[data.length-2]+"/"+data[data.length-1]
+  answers = {}
+  answers["status"]=0
+  for(var i=0; i<data.length-3; i+=2) {
+    qnum = String(data[i]).split(" ")[0][0].toLocaleLowerCase()+String(data[i]).split(" ")[1]
+    answers[qnum]={}
+    answers[qnum]["grade"]=0
+    downurl = data[i+1].split("<!>")
+    answers[qnum]["response"]=downurl
+    if(data[i+1]=="?" || data[i+1]=="") answers[qnum]["response"]="none"
+  }
+  db.ref(path).set(answers)
+  res.json({ success: true });
+})
 
 app.get('/user/:idToken',function(req,res) {
   idToken = req.params.idToken
@@ -173,7 +150,7 @@ app.get('/user/:idToken',function(req,res) {
         exams.once("value", function(snapshot) {
           result = Object.values(snapshot.val())
           quizkeys = Object.keys(snapshot.val())
-          console.log(result)
+          // console.log(result)
           result = result.filter(function(e, index) {
             return Number(e.date) >= Number(timecode) && Number(e.date) <= Number(timecode2)
           })
@@ -198,8 +175,8 @@ app.get('/user/:idToken',function(req,res) {
               }
           });
           final.push(tempfinal)
-          console.log(final)
-          console.log(quizkeys)
+          // console.log(final)
+          // console.log(quizkeys)
           for(var i=0; i<final.length; i++) {
             for(var j=0; j<final[i].length; j++) {
               final[i][j]=[final[i][j],

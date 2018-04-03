@@ -39,41 +39,39 @@ $('div[id="code"]').on('input', function () {
 	// 	this.style.height = $(this).children(".CodeFlask__textarea").scrollTop()*5 + $(this).children(".CodeFlask__textarea").height() + 'px';
 });
 
+// FilePond.registerPlugin(
+// 	FilePondPluginFileEncode,
+// 	FilePondPluginFileValidateSize,
+// 	FilePondPluginImageExifOrientation,
+// 	FilePondPluginImagePreview
+// );
 // const inputElement = document.querySelectorAll('input[type="file"]');
 // inputElement.forEach(function(e) {
-// 	var pond = FilePond.create(e);
+// 	console.log(e.id)
+// 	FilePond.create(
+// 		document.querySelector(String(e.id))
+// 	);
+// 	console.log(e.id.split(" ").join(""))
+// 	console.log(e)
+// 	eval(e.id.split(" ").join("") + " = " + "FilePond.create(e)");
+// 	eval(e.id.split(" ").join("")+`.setOptions({
+// 		ignoredFiles: ['.ds_store', 'thumbs.db', 'desktop.ini'],
+// 		labelIdle: 'Drop files or <span class="filepond--label-action">Browse</span>',
+// 	})`);
+// 	pond.setOptions({
+// 		ignoredFiles: ['.ds_store', 'thumbs.db', 'desktop.ini'],
+// 		labelIdle: 'Drop files or <span class="filepond--label-action">Browse</span>',
+// 	})
 // })
+
+// Select the file input and use create() to turn it into a pond
+// FilePond.create(
+// 	document.querySelectorAll('input')
+// );
 // FilePond.setOptions({
 // 	ignoredFiles: ['.ds_store', 'thumbs.db', 'desktop.ini'],
 // 	labelIdle: 'Drop files or <span class="filepond--label-action">Browse</span>',
 // })
-
-/*
-We want to preview images, so we need to register the Image Preview plugin
-*/
-FilePond.registerPlugin(
-	
-	// encodes the file as base64 data
-  FilePondPluginFileEncode,
-	
-	// validates the size of the file
-	FilePondPluginFileValidateSize,
-	
-	// corrects mobile image orientation
-	FilePondPluginImageExifOrientation,
-	
-	// previews dropped images
-  FilePondPluginImagePreview
-);
-
-// Select the file input and use create() to turn it into a pond
-FilePond.create(
-	document.querySelector('input')
-);
-FilePond.setOptions({
-	ignoredFiles: ['.ds_store', 'thumbs.db', 'desktop.ini'],
-	labelIdle: 'Drop files or <span class="filepond--label-action">Browse</span>',
-})
 
 $(document).ready(function() {
 
@@ -100,7 +98,6 @@ $(document).ready(function() {
 });
 
 document.getElementById("submit").addEventListener("click", function(){
-	console.log("this is submit")
 	allresponses = document.querySelectorAll('aside[attribute="question"]')
 	responsesubmit = []
 	allresponses.forEach(function(curq) {
@@ -123,12 +120,37 @@ document.getElementById("submit").addEventListener("click", function(){
 			responsesubmit.push(document.getElementById(curq.id).getElementsByClassName("placeholder")[0].innerHTML)
 		}
 		if(curq.getAttribute("name")=="file submission") {
-			console.log(pond.files);
+			allfiles = document.getElementById(curq.id+" file").files
+			var downf = []
+			for(var i=0; i<allfiles.length; i++) {
+				var file = allfiles[i]
+				var storageRef = firebase.storage().ref().child(firebase.auth().currentUser.uid+"/"+
+																												document.getElementById(curq.id+" file").getAttribute("examid")+
+																												"/"+file.name);
+				// downf.push(storageRef.put(file).then(function(snapshot) {
+				// 	return snapshot.metadata.downloadURLs
+				// })[0])
+				storageRef.put(file)
+				downf.push(firebase.auth().currentUser.uid+"/"+
+									document.getElementById(curq.id+" file").getAttribute("examid")+
+									"/"+file.name)
+			}
+			responsesubmit.push(curq.id)
+			if(downf.length==0) responsesubmit.push("")
+			else responsesubmit.push(downf.join("<!>"))
 		}
 	})
 	console.log(responsesubmit)
+	responsesubmit.push(firebase.auth().currentUser.uid)
+	responsesubmit.push(document.getElementsByName("thiswillbeexamid")[0].getAttribute("id"))
+	$.ajax({
+		url: '/submitresponse',
+		type: 'POST',
+		data: {
+				responsesubmit
+		},
+		success: function(data){
+			Jackbox.success("Submission Successful");
+		}
 });
-
-document.getElementById("save").addEventListener("click", function(){
-	console.log("this is save")
 });

@@ -1,5 +1,5 @@
 <main class="cd-main-content">
-    <div class="contact-area">
+    div(class="contact-area" name="thiswillbeexamid" id=allquestions[0].examid)
         for eachQ in allquestions
             <div class="contact">
                 <main>
@@ -28,13 +28,13 @@
                                     for qchoice in eachQ.choice
                                         option(value=qchoice) #{qchoice}
                             if eachQ.type == "file submission"
-                                <input type="file" class="filepond" name="filepond" multiple data-max-file-size="3MB" data-max-files="3" />
+                                input(examid = eachQ.examid id=eachQ.questionNum+" file" type="file" required multiple)
+                                //- <input name=eachQ.type id=eachQ.questionNum type="file" class="filepond" name="filepond" multiple data-max-file-size="3MB" data-max-files="3" />
                             if eachQ.type == "text input"
                                 <div class="codeview" id="code"></div>
                 </main>
             </div>
     </div>
-    <button id="save">Save</button>
     <button id="submit">Submit</button>
 </main>
 
