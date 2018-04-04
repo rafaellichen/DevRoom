@@ -64,6 +64,65 @@ app.get('/revoke/:uid',function(req,res) {
   res.render("home")
 })
 
+app.get('/grade/:examididToken',function(req,res) {
+  idToken = req.params.examididToken.slice(32)
+  examid = req.params.examididToken.slice(0,32)
+  let checkRevoked = true;
+  admin.auth().verifyIdToken(idToken, checkRevoked)
+  .then(function(decodedToken) {
+    var uid = decodedToken.uid
+    var ref = db.ref("user/"+uid)
+    ref.once("value", function(snapshot) {
+      if(snapshot.val().permission==1) {
+        db.ref("grade").once("value", function(snapshot) {
+          val = snapshot.val()
+          allstudent = []
+          keys = Object.keys(val)
+          keys.forEach(function(e) {
+            if(val[e][examid]) {
+              allstudent.push(e)
+            }
+          })
+          if(allstudent.length) res.render('instructor', {examlist: true, students: allstudent, examid: examid})
+          else res.render('instructor', {examlist: true, students: [], examid: examid})
+        })
+      }
+    })
+  }).catch(function(error) {
+    res.render('home');
+  });
+  // admin.database().ref().child('posts').push().key;
+  // -L8dhkOiGQI7J0pQafZF length: 20 chars
+  // res.render('student', {home: false, exam: true})
+});
+
+app.get('/gradeexam/:examididToken', function(req, res) {
+  idToken = req.params.examididToken.slice(60)
+  examid = req.params.examididToken.slice(0,32)
+  student = req.params.examididToken.slice(32,60)
+  let checkRevoked = true;
+  admin.auth().verifyIdToken(idToken, checkRevoked)
+  .then(function(decodedToken) {
+    db.ref("grade/"+student+"/"+examid).once("value", function(snapshot1) {
+      db.ref("questions/"+examid).once("value", function(snapshot2) {
+        thisexam = snapshot2.val()
+        questionkeys = Object.keys(thisexam)
+        allquestions = []
+        questionkeys.forEach(function(element) {
+          obj = thisexam[element]
+          obj["questionNum"] = "Question "+element.slice(1)
+          obj["choice"] = obj["choice"].split("<!>")
+          obj["examid"] = examid
+          obj["studentans"]=snapshot1.val()[element]["response"]
+          allquestions.push(obj)
+        })
+        console.log(allquestions)
+        res.render('instructor', {exam: true, home: false, allquestions: allquestions})
+      })
+    })
+  })
+})
+
 app.get('/exam/:examididToken',function(req,res) {
   idToken = req.params.examididToken.slice(32)
   examid = req.params.examididToken.slice(0,32)
@@ -124,6 +183,7 @@ app.get('/user/:idToken',function(req,res) {
     var uid = decodedToken.uid;
     var ref = db.ref("user/"+uid);
     ref.once("value", function(snapshot) {
+      console.log(snapshot.val().permission)
       if(snapshot.val().permission==0) {
         // fetch all the exams
         var exams = db.ref("quiz/")
@@ -191,7 +251,70 @@ app.get('/user/:idToken',function(req,res) {
         })
       }
       if(snapshot.val().permission==1) {
-        res.render('instructor')
+        // fetch all the exams
+        var exams = db.ref("quiz/")
+        var today = new Date();
+        var future = new Date();
+        future.setDate(today.getDate()-11);
+        var dd = today.getDate();
+        var mm = today.getMonth()+1;
+        var yyyy = today.getFullYear();
+        if(dd<10) dd = '0'+dd
+        if(mm<10) mm = '0'+mm
+        var timecode = mm+dd+yyyy
+        var dd = future.getDate();
+        var mm = future.getMonth()+1;
+        var yyyy = future.getFullYear();
+        if(dd<10) dd = '0'+dd
+        if(mm<10) mm = '0'+mm
+        var timecode2 = mm+dd+yyyy
+        hour = today.getHours()
+        minute = today.getMinutes()
+        if (Number(hour)<10) hour = '0'+hour
+        if (Number(minute)<10) minute = '0'+minute
+        var currenttime = String(hour)+String(minute)
+        exams.once("value", function(snapshot) {
+          result = Object.values(snapshot.val())
+          quizkeys = Object.keys(snapshot.val())
+          // console.log(result)
+          result = result.filter(function(e, index) {
+            return Number(e.date) <= Number(timecode) && Number(e.date) >= Number(timecode2)
+          })
+          quizkeys = quizkeys.filter(function(e) {
+            return Number(e.slice(0,8)) <= Number(timecode) && Number(e.slice(0,8)) >= Number(timecode2) 
+          })
+          final = []
+          tempfinal = []
+          currfinal = ""
+          quizkeys.forEach(function(element,index) {
+              if(element.slice(0,8)==currfinal) {
+                  tempfinal.push(element)
+              } else {
+                  currfinal = element.slice(0,8)
+                  if(!index) {
+                    tempfinal.push(element)
+                  } else {
+                    final.push(tempfinal)
+                    tempfinal = []
+                    tempfinal.push(element)
+                  }
+              }
+          });
+          final.push(tempfinal)
+          // console.log(final)
+          // console.log(quizkeys)
+          for(var i=0; i<final.length; i++) {
+            for(var j=0; j<final[i].length; j++) {
+              final[i][j]=[final[i][j],
+                          result[quizkeys.indexOf(final[i][j])].name,
+                          result[quizkeys.indexOf(final[i][j])].start,
+                          examStarted(currenttime,result[quizkeys.indexOf(final[i][j])].date,timecode,result[quizkeys.indexOf(final[i][j])].start)]
+            }
+            final[i].unshift([textDate(final[i][0][0].slice(0,8))])
+          }
+          // console.log(final)
+          res.render('instructor',{home: true, exam: false, examcard: final})
+        })
       }
     });
   }).catch(function(error) {

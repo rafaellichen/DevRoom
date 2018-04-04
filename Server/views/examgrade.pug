@@ -1,0 +1,45 @@
+<main class="cd-main-content">
+    div(class="contact-area" name="thiswillbeexamid" id=allquestions[0].examid)
+        for eachQ in allquestions
+            <div class="contact">
+                <main>
+                    <section>
+                        <div class="content">
+                            <aside>
+                                <h1>#{eachQ.questionNum}</h1>
+                                <p>#{eachQ.description}</p>
+                            </aside>
+                        </div>
+                    </section>
+                    div(name="question" class="content" id="bottom")
+                        aside(name=eachQ.type id=eachQ.questionNum attribute="question")
+                            if eachQ.type == "single choice"
+                                <div class="noclick wrapper typo">
+                                    <div class="list"><span class="placeholder">#{eachQ.studentans}</span>
+                                        //- <ul class="list__ul">
+                                        //-     <li><a></a></li>
+                                        //-     for qchoice in eachQ.choice
+                                        //-         <li><a>#{qchoice}</a></li>
+                                        //- </ul>
+                                    </div>
+                                </div>
+                            if eachQ.type == "multiple choice"
+                                div(class="noclick")
+                                    select(name="mc" id=eachQ.questionNum multiple)
+                                        for qchoice in eachQ.studentans
+                                            option(value=qchoice) #{qchoice}
+                            if eachQ.type == "file submission"
+                                for each in eachQ.studentans
+                                    p(id="downloadfilelink") #{each}
+                                //- input(examid = eachQ.examid id=eachQ.questionNum+" file" type="file" required multiple)
+                                //- <input name=eachQ.type id=eachQ.questionNum type="file" class="filepond" name="filepond" multiple data-max-file-size="3MB" data-max-files="3" />
+                            if eachQ.type == "text input"
+                                //- p(id="studentcode") #{eachQ.studentans}
+                                <div class="codeview" id="code">
+                                    p #{eachQ.studentans}
+                                </div>
+                </main>
+            </div>
+    </div>
+    <button id="grade">Submit</button>
+</main>
