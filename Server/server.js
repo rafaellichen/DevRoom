@@ -116,7 +116,8 @@ app.get('/gradeexam/:examididToken', function(req, res) {
           obj["studentans"]=snapshot1.val()[element]["response"]
           allquestions.push(obj)
         })
-        console.log(allquestions)
+        allquestions['studentid'] = student
+        // console.log(allquestions)
         res.render('instructor', {exam: true, home: false, allquestions: allquestions})
       })
     })
@@ -158,6 +159,28 @@ app.get('/exam/:examididToken',function(req,res) {
   // res.render('student', {home: false, exam: true})
 });
 
+app.post('/submitgrades', function(req, res) {
+  data = req.body.allpoints
+  questionkeys = []
+  if(data.includes("0")) allchecked = false
+  else allchecked = true
+  for(var i=1; i<data.length-1; i++) {
+    questionkeys.push("q"+i)
+  }
+  console.log(allchecked)
+  if(allchecked==true) {
+    db.ref("grade/"+data[data.length-1]+"/"+data[data.length-2]).update({
+      status: 1
+    })
+  }
+  questionkeys.forEach(function(e, index) {
+    db.ref("grade/"+data[data.length-1]+"/"+data[data.length-2]+"/"+e).update({
+      grade: data[index]
+    })
+  })
+  res.json({ success: true });
+})
+
 app.post('/submitresponse', function(req, res){
   data = req.body.responsesubmit
   path = "grade/"+data[data.length-2]+"/"+data[data.length-1]
@@ -183,7 +206,7 @@ app.get('/user/:idToken',function(req,res) {
     var uid = decodedToken.uid;
     var ref = db.ref("user/"+uid);
     ref.once("value", function(snapshot) {
-      console.log(snapshot.val().permission)
+      // console.log(snapshot.val().permission)
       if(snapshot.val().permission==0) {
         // fetch all the exams
         var exams = db.ref("quiz/")

@@ -1,5 +1,5 @@
 <main class="cd-main-content">
-    div(class="contact-area" name="thiswillbeexamid" id=allquestions[0].examid)
+    div(class="contact-area" name="thiswillbeexamid" id=allquestions[0].examid student=allquestions.studentid)
         for eachQ in allquestions
             <div class="contact">
                 <main>
@@ -7,6 +7,10 @@
                         <div class="content">
                             <aside>
                                 <h1>#{eachQ.questionNum}</h1>
+                                select(name="gradecheck" id=eachQ.questionNum)
+                                    option(value="-1") inccorect
+                                    option(value="0" selected)
+                                    option(value="1") correct
                                 <p>#{eachQ.description}</p>
                             </aside>
                         </div>

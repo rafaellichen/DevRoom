@@ -52,7 +52,15 @@ $(document).ready(function() {
     for(var i=0; i<alltags.length; i++) {
         alltags[i].classList.add('active')
     }
-  });
+
+});
+
+$('p[id="downloadfilelink"]').on("click", function() {
+    var thise = this.innerHTML
+    var storageRef = firebase.storage().ref().child(thise).getDownloadURL().then(function(url) {
+        window.open(url, '_blank');
+    })
+})
 
 $('a[name="logout"]').on("click", function() {
 	uid = firebase.auth().currentUser.uid
@@ -70,7 +78,7 @@ $('a[name="examresponse"]').on("click", function() {
         window.location.replace("/gradeexam/"+
                                 document.getElementById("examidofthisexam").innerHTML+
                                 student+idToken)
-        console.log(idToken)
+        // console.log(idToken)
     })
 })
 

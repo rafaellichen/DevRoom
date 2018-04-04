@@ -58,7 +58,28 @@ $(document).ready(function() {
 
 if(document.getElementById("grade")) {
 	document.getElementById("grade").addEventListener("click", function() {
-		alert(123)
+		allgrades = document.querySelectorAll('select[name="gradecheck"]')
+		allpoints = []
+		for(var i=0; i<allgrades.length; i++) {
+			allpoints.push(allgrades[i].value)
+		}
+		allpoints.push(document.getElementsByName("thiswillbeexamid")[0].getAttribute("id"))
+		allpoints.push(document.getElementsByName("thiswillbeexamid")[0].getAttribute("student"))
+		$.ajax({
+			url: '/submitgrades',
+			type: 'POST',
+			data: {
+					allpoints
+			},
+			success: function(data){
+				Jackbox.success("Submission Successful");
+				setTimeout(function(){
+					firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
+							window.location.replace("/user/"+idToken)
+					})
+				}, 2000);
+			}
+	});
 	})
 }
 
