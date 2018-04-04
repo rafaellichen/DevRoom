@@ -1,3 +1,14 @@
+.left-half {
+  float: left;
+  width: 50%;
+  color: white;
+  font-size: 18pt;
+}
+.right-half {
+  float: left;
+  width: 30%;
+}
+
 /*//////////////////////////////////////////////////////////////////
 [ FONT ]*/
 
@@ -166,7 +177,10 @@ iframe {
   justify-content: center;
   align-items: center;
   padding: 15px;
-  background-image: url("/images/bg.jpg");
+}
+
+body {
+  background: linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)), url("/images/studybg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
