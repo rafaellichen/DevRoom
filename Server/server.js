@@ -264,7 +264,7 @@ app.get('/user/:idToken',function(req,res) {
             for(var j=0; j<final[i].length; j++) {
               final[i][j]=[final[i][j],
                           result[quizkeys.indexOf(final[i][j])].name,
-                          result[quizkeys.indexOf(final[i][j])].start,
+                          String(result[quizkeys.indexOf(final[i][j])].start).slice(0,2)+":"+String(result[quizkeys.indexOf(final[i][j])].start).slice(2),
                           examStarted(currenttime,result[quizkeys.indexOf(final[i][j])].date,timecode,result[quizkeys.indexOf(final[i][j])].start)]
             }
             final[i].unshift([textDate(final[i][0][0].slice(0,8))])
