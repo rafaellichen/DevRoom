@@ -234,12 +234,12 @@ app.get('/user/:idToken',function(req,res) {
           result = Object.values(snapshot.val())
           quizkeys = Object.keys(snapshot.val())
           // console.log(result)
-          result = result.filter(function(e, index) {
-            return Number(e.date) >= Number(timecode) && Number(e.date) <= Number(timecode2)
-          })
-          quizkeys = quizkeys.filter(function(e) {
-            return Number(e.slice(0,8)) >= Number(timecode) && Number(e.slice(0,8)) <= Number(timecode2) 
-          })
+          // result = result.filter(function(e, index) {
+          //   return Number(e.date) >= Number(timecode) && Number(e.date) <= Number(timecode2)
+          // })
+          // quizkeys = quizkeys.filter(function(e) {
+          //   return Number(e.slice(0,8)) >= Number(timecode) && Number(e.slice(0,8)) <= Number(timecode2) 
+          // })
           final = []
           tempfinal = []
           currfinal = ""
@@ -300,12 +300,12 @@ app.get('/user/:idToken',function(req,res) {
           result = Object.values(snapshot.val())
           quizkeys = Object.keys(snapshot.val())
           // console.log(result)
-          result = result.filter(function(e, index) {
-            return Number(e.date) <= Number(timecode) && Number(e.date) >= Number(timecode2)
-          })
-          quizkeys = quizkeys.filter(function(e) {
-            return Number(e.slice(0,8)) <= Number(timecode) && Number(e.slice(0,8)) >= Number(timecode2) 
-          })
+          // result = result.filter(function(e, index) {
+          //   return Number(e.date) <= Number(timecode) && Number(e.date) >= Number(timecode2)
+          // })
+          // quizkeys = quizkeys.filter(function(e) {
+          //   return Number(e.slice(0,8)) <= Number(timecode) && Number(e.slice(0,8)) >= Number(timecode2) 
+          // })
           final = []
           tempfinal = []
           currfinal = ""
@@ -330,7 +330,7 @@ app.get('/user/:idToken',function(req,res) {
             for(var j=0; j<final[i].length; j++) {
               final[i][j]=[final[i][j],
                           result[quizkeys.indexOf(final[i][j])].name,
-                          result[quizkeys.indexOf(final[i][j])].start,
+                          String(result[quizkeys.indexOf(final[i][j])].start).slice(0,2)+":"+String(result[quizkeys.indexOf(final[i][j])].start).slice(2),
                           examStarted(currenttime,result[quizkeys.indexOf(final[i][j])].date,timecode,result[quizkeys.indexOf(final[i][j])].start)]
             }
             final[i].unshift([textDate(final[i][0][0].slice(0,8))])
