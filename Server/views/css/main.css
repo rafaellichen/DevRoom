@@ -2,11 +2,16 @@
   float: left;
   width: 50%;
   color: white;
-  font-size: 18pt;
+  font-size: 14pt;
+  word-spacing: 2px;
+  letter-spacing: 2px;
 }
 .right-half {
   float: left;
   width: 30%;
+}
+span {
+  color: #57b846;
 }
 
 /*//////////////////////////////////////////////////////////////////
