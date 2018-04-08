@@ -54,25 +54,25 @@ $('a[name="logout"]').on("click", function() {
 	Jackbox.information("Logging out. Energize!")
 	setTimeout(function(){
 		firebase.auth().signOut().then(function() {
-			window.location.replace("/revoke/"+uid)
+			window.location.href = "/revoke/"+uid
 		})
 	}, 2000);
 })
 
 $('a[name="home"]').on("click", function() {
 	firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
-		window.location.replace("/user/"+idToken)
+		window.location.href = "/user/"+idToken
 	})
 })
 
 $('a[name="profile"]').on("click", function() {
-	// window.location.replace("/profile")
+	// window.location.href = "/profile")
 })
 
 $('a[name="examLink"]').on("click", function() {
 	examid = $(this).attr('id')
 	firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
-		window.location.replace("/exam/"+examid+idToken)
+		window.location.href = "/exam/"+examid+idToken
 	})
 })
 

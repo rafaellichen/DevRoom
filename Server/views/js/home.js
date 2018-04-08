@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             Jackbox.success("Verification successful. Maximum warp.")
             setTimeout(function(){
                 firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
-                    window.location.replace("/user/"+idToken)
+                    window.location.href = "/user/"+idToken
                 })
             }, 2000);
         }

@@ -75,7 +75,7 @@ if(document.getElementById("grade")) {
 				Jackbox.success("Submission Successful");
 				setTimeout(function(){
 					firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
-							window.location.replace("/user/"+idToken)
+							window.location.href = "/user/"+idToken
 					})
 				}, 2000);
 			}
@@ -141,7 +141,7 @@ if(document.getElementById("submit")) {
 				Jackbox.success("Submission Successful");
 				setTimeout(function(){
 					firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
-							window.location.replace("/user/"+idToken)
+							window.location.href = "/user/"+idToken
 					})
 				}, 2000);
 			}
