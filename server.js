@@ -270,6 +270,7 @@ app.get('/user/:idToken',function(req,res) {
             final[i].unshift([textDate(final[i][0][0].slice(0,8))])
           }
           // console.log(final)
+          final = final.reverse()
           res.render('student',{home: true, exam: false, examcard: final})
         })
       }
@@ -336,6 +337,7 @@ app.get('/user/:idToken',function(req,res) {
             final[i].unshift([textDate(final[i][0][0].slice(0,8))])
           }
           // console.log(final)
+          final = final.reverse()
           res.render('instructor',{home: true, exam: false, examcard: final})
         })
       }
