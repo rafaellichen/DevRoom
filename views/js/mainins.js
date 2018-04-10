@@ -52,15 +52,29 @@ $(document).ready(function() {
     for(var i=0; i<alltags.length; i++) {
         alltags[i].classList.add('active')
     }
-
 });
 
 $('p[id="downloadfilelink"]').on("click", function() {
     var thise = this.innerHTML
     var storageRef = firebase.storage().ref().child(thise).getDownloadURL().then(function(url) {
-        window.open(url, '_blank');
+        window.open(url, '_blank');1
     })
 })
+
+document.addEventListener("DOMContentLoaded", function(event) {
+	// allstudent = document.getElementsByName("examresponse")
+	// for(var i=0; i<allstudent.length; i++) {
+	// 	var hi = allstudent[i].innerHTML
+	// 	c
+	// 	firebase.database().ref('/user/' + allstudent[i].innerHTML).once('value').then(function(snapshot) {
+	// 		// val = snapshot.val()
+	// 		console.log(document.getElementById(hi).innerHTML)
+	// 		// document.getElementById(hi).innerHTML = val["first"]+" "+val["last"]
+	// 		// console.log(val["first"]+" "+val["last"])
+	// 	});
+	// }
+	
+});
 
 $('a[name="logout"]').on("click", function() {
 	uid = firebase.auth().currentUser.uid
@@ -73,12 +87,12 @@ $('a[name="logout"]').on("click", function() {
 })
 
 $('a[name="examresponse"]').on("click", function() {
-    student = this.innerHTML
+    student = this.id
     firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
         window.location.href = "/gradeexam/"+
                                 document.getElementById("examidofthisexam").innerHTML.slice(9)+
                                 student+idToken
-        // console.log(idToken)
+		// console.log(idToken)
     })
 })
 

@@ -83,15 +83,15 @@ app.get('/grade/:examididToken',function(req,res) {
               allstudent.push(e)
             }
           })
-          // finalstudent = []
-          // allstudent.forEach(function(e) {
-          //   console.log(e)
-          //   db.ref("user/"+e).once("value", function(name) {
-          //     finalstudent.push(name.val()["first"]+name.val()["last"]) 
-          //   })        
-          // })
-          if(allstudent.length) res.render('instructor', {examlist: true, students: allstudent, examid: examid})
-          else res.render('instructor', {examlist: true, students: [], examid: examid})
+          db.ref("user").once("value", function(e) {
+            val = e.val()
+            allnames = []
+            for(var i=0; i<allstudent.length; i++) {
+              allnames.push(val[allstudent[i]]["first"]+" "+val[allstudent[i]]["last"])
+            }
+            if(allstudent.length) res.render('instructor', {examlist: true, students: allstudent, allnames: allnames, examid: examid})
+            else res.render('instructor', {examlist: true, students: [], allnames: allnames, examid: examid})
+          })
         })
       }
     })

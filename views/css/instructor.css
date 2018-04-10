@@ -161,13 +161,23 @@
 .gradecontact {
   border-top-left-radius: 11px;
   border-top-right-radius: 11px;
-  width: 100%;
+  /* width: 100px; */
   border-bottom-left-radius: 11px;
   border-bottom-right-radius: 11px;
   height: 75px;
+  /* text-decoration: none; */
+  margin-bottom: 10px;
   background-color: rgb(111,111,111);
 }
-
+.gradecontent {
+  padding: 25px 30px 30px 30px;
+  position: relative;
+  text-align: left;
+  width: 100%;
+  font-size: 17pt;
+  color: #ffffff;
+  /* margin-top: 10px; */
+}
 
 .contact main section .content {
   /* width: 100%; */

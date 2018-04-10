@@ -2,23 +2,17 @@
     h1 These are the student(s) who took the exam
     h3(id="examidofthisexam") Exam ID: #{examid}
     //- p #{allname}
-    for each in students
+    for each,val in students
         div(class="contact-area")
             <div class="contact">
                 <main>
                     <section class="gradecontact">
-                        <div class="content">
+                        <div class="gradecontent">
                             <aside>
-                                a(name="examresponse") #{each}
+                                a(name="examresponse" id=each) #{allnames[val]}
                             </aside>
                         </div>
                     </section>
                 </main>
             </div>
-            //- <ul class="list-group">
-            //-     for each in students
-            //-         <li class="list-group-item">
-            //-             a(name="examresponse") #{each}
-            //-         </li>
-            //- </ul>
 </main>
