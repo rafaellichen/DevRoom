@@ -9,7 +9,7 @@
                                 <h1>#{eachQ.questionNum}</h1>
                                 select(name="gradecheck" id=eachQ.questionNum)
                                     option(value="-1") inccorect
-                                    option(value="0" selected)
+                                    option(value="0" selected) Not Graded Yet
                                     option(value="1") correct
                                 <p>#{eachQ.description}</p>
                             </aside>
@@ -45,5 +45,5 @@
                 </main>
             </div>
     </div>
-    <button id="grade">Submit</button>
+    <button class="thisdamnbutton" id="grade">Submit</button>
 </main>
