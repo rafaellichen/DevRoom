@@ -76,7 +76,7 @@ $('a[name="examresponse"]').on("click", function() {
     student = this.innerHTML
     firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
         window.location.href = "/gradeexam/"+
-                                document.getElementById("examidofthisexam").innerHTML+
+                                document.getElementById("examidofthisexam").innerHTML.slice(9)+
                                 student+idToken
         // console.log(idToken)
     })
