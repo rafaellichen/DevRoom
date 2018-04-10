@@ -72,8 +72,8 @@ app.get('/grade/:examididToken',function(req,res) {
   .then(function(decodedToken) {
     var uid = decodedToken.uid
     var ref = db.ref("user/"+uid)
-    ref.once("value", function(snapshot) {
-      if(snapshot.val().permission==1) {
+    ref.once("value", function(snapshot1) {
+      if(snapshot1.val().permission==1) {
         db.ref("grade").once("value", function(snapshot) {
           val = snapshot.val()
           allstudent = []
@@ -83,6 +83,13 @@ app.get('/grade/:examididToken',function(req,res) {
               allstudent.push(e)
             }
           })
+          // finalstudent = []
+          // allstudent.forEach(function(e) {
+          //   console.log(e)
+          //   db.ref("user/"+e).once("value", function(name) {
+          //     finalstudent.push(name.val()["first"]+name.val()["last"]) 
+          //   })        
+          // })
           if(allstudent.length) res.render('instructor', {examlist: true, students: allstudent, examid: examid})
           else res.render('instructor', {examlist: true, students: [], examid: examid})
         })

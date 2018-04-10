@@ -1,10 +1,24 @@
 <main class="cd-main-content">
     h1 These are the student(s) who took the exam
-    p(id="examidofthisexam") #{examid}
-    <ul class="list-group">
-        for each in students
-            <li class="list-group-item">
-                a(name="examresponse") #{each}
-            </li>
-    </ul>
+    h3(id="examidofthisexam") Exam ID: #{examid}
+    //- p #{allname}
+    for each in students
+        div(class="contact-area")
+            <div class="contact">
+                <main>
+                    <section class="gradecontact">
+                        <div class="content">
+                            <aside>
+                                a(name="examresponse") #{each}
+                            </aside>
+                        </div>
+                    </section>
+                </main>
+            </div>
+            //- <ul class="list-group">
+            //-     for each in students
+            //-         <li class="list-group-item">
+            //-             a(name="examresponse") #{each}
+            //-         </li>
+            //- </ul>
 </main>
