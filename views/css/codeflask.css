@@ -22,6 +22,17 @@ pre[class*="language-"]{
     word-wrap: break-word;
 }
 
+.thisdamnbutton {
+    width: 100%;
+    background: #57b846;
+    border-top-left-radius: 11px;
+    border-top-right-radius: 11px;
+    border-bottom-left-radius: 11px;
+    border-bottom-right-radius: 11px;
+    height: 50px;
+    font-size: 17pt;
+}
+
 .CodeFlask__textarea{
     border:none;
     background:transparent;
