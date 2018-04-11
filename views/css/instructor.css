@@ -179,6 +179,10 @@
   /* margin-top: 10px; */
 }
 
+.gradecontent a {
+  cursor:pointer;
+}
+
 .contact main section .content {
   /* width: 100%; */
   padding: 20px 30px 50px 30px;
