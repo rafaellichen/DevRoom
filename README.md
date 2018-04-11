@@ -28,7 +28,7 @@ Say what the step will be
 ```
 
 ```
-2. cd into DevRoom directory and Server folder; then, run 'npm install'
+2. cd into DevRoom directory and run 'npm install'
 ```
 
 ```
